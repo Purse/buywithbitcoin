@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Pay With Bitcoin Button",
+  "description": "Get 5-33% off anything on Amazon.com with Bitcoin",
+  "version": "0.0.1",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "event.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Pay With Bitcoin Button",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": [],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": [ "tabs", "http://*/*", "https://*/*", "https://purse.io/" ]
+}
