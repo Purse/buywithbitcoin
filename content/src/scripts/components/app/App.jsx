@@ -19,7 +19,7 @@ class App extends Component {
         const cookieKeyVal = cookie.split('=');
         if (cookieKeyVal[0] === 'purse_token') {
           this.getUser(cookieKeyVal[1]);
-          
+
           this.props.dispatch({
             type: 'ADD_TOKEN',
             token: cookieKeyVal[1]
@@ -33,7 +33,7 @@ class App extends Component {
       this.grabPrice();
     }
   }
-  
+
   getUser(token) {
     fetch(`https://api.purse.io/api/v1/users/me`, {
       method: 'GET',
@@ -53,23 +53,23 @@ class App extends Component {
       })
       .catch(console.log);
   }
-  
+
   grabAsin() {
     const asin = document.querySelector('[data-asin]').getAttribute('data-asin');
     if (asin) {
       this.setState({asin: asin});
     }
   }
-  
+
   grabPrice() {
     const priceStr = document.querySelector('#priceblock_ourprice').innerText;
     const priceNum = parseFloat(priceStr.replace(/\$|,/g, ''));
     const fivePercentOff = (priceNum * (1 - .05)).toFixed(2);
     const thirtyThreePercentOff = (priceNum * (1 - .33)).toFixed(2);
-    const percentOffText = `$${fivePercentOff} - $${thirtyThreePercentOff}`;
+    const percentOffText = `$${thirtyThreePercentOff} - $${fivePercentOff}`;
     this.setState({ percentOffText });
   }
-  
+
   addToCart() {
     const body = {
       country: 'US',
@@ -116,7 +116,7 @@ class App extends Component {
     return (
       <div>
       {isAmazonAndLoggedIn &&
-        <button style={buttonStyle} onClick={this.addToCart}>Buy with Bitcoin {this.state.percentOffText}</button>}
+        <button style={buttonStyle} onClick={this.addToCart}>Pay <b>{this.state.percentOffText}</b> with Bitcoin</button>}
       </div>
     );
   }
