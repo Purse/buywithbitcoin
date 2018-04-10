@@ -55,11 +55,21 @@ gulp.task('copy-icons', ['clean'], () => {
     .pipe(gulp.dest('./build/icons'));
 });
 
+gulp.task('copy-styles', ['clean'], () => {
+  return gulp.src('styles/*.css')
+    .pipe(gulp.dest('./build/styles'));
+});
+
+gulp.task('copy-scripts', ['clean'], () => {
+  return gulp.src('scripts/*.js')
+    .pipe(gulp.dest('./build/scripts'));
+});
+
 gulp.task('clean', (cb) => {
   rimraf('./build', cb);
 });
 
-gulp.task('build', ['copy-manifest', 'copy-icons', 'popup-js', 'popup-html', 'event-js', 'content-js']);
+gulp.task('build', ['copy-manifest', 'copy-icons', 'copy-styles', 'copy-scripts', 'popup-js', 'popup-html', 'event-js', 'content-js']);
 
 gulp.task('watch', ['default'], () => {
   gulp.watch('popup/**/*', ['build']);

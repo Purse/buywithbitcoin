@@ -9,20 +9,22 @@ class App extends Component {
       showAmazon: false
     };
     this.addToCart = this.addToCart.bind(this);
+    this.getCart = this.getCart.bind(this);
   }
 
   componentDidMount() {
-    if (document.location.host === 'purse.io') {
+    if (document.location.host === 'purse.io' && (!this.state.token)) {
       const showAmazon = false;
       this.setState({ showAmazon });
       document.cookie.split('; ').forEach((cookie) => {
         const cookieKeyVal = cookie.split('=');
         if (cookieKeyVal[0] === 'purse_token') {
           this.getUser(cookieKeyVal[1]);
-
           this.props.dispatch({
             type: 'ADD_TOKEN',
             token: cookieKeyVal[1]
+          }).then(() => {
+            this.getCart(cookieKeyVal[1]);
           });
         }
       });
@@ -32,6 +34,27 @@ class App extends Component {
       this.grabAsin();
       this.grabPrice();
     }
+  }
+  
+  getCart(token) {
+    fetch(`https://api.purse.io/api/v1/users/me/lists`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `JWT ${token}`,
+        'Content-Type': 'application/json',
+        'origin': 'https://purse.io'
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        if (response[0] && response[0].items && response[0].items.length) {
+          this.props.dispatch({
+            type: 'ADD_CART_ITEM',
+            items: response[0].items
+          });
+        }
+      })
+      .catch();
   }
 
   getUser(token) {
@@ -71,16 +94,18 @@ class App extends Component {
   }
 
   addToCart() {
+    const newItem = {
+      asin: this.state.asin,
+      quantity: 1,
+      country: 'US',
+      variation: true
+    };
+    
     const body = {
       country: 'US',
       name: 'Cart',
       id: 1,
-      items: [{
-        asin: this.state.asin,
-        quantity: 1,
-        country: 'US',
-        variation: true
-      }]
+    items: [newItem, ...this.props.cart]
     };
     fetch(`https://api.purse.io/api/v1/users/${this.props.username}/lists/1`, {
       method: 'PUT',
@@ -91,9 +116,7 @@ class App extends Component {
       },
       body: JSON.stringify(body)
     })
-      .then(response => {
-        console.log(response.json());
-      })
+      .then(response => response.json())
       .catch(console.log);
   }
 
@@ -126,7 +149,8 @@ const mapStateToProps = (state) => {
   return {
     count: state.count,
     token: state.token,
-    username: state.username
+    username: state.username,
+    cart: state.cart
   };
 };
 
