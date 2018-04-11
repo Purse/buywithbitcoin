@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    alert('foooooooo');
     if (document.location.host === 'purse.io' && (!this.state.token)) {
       const showAmazon = false;
       this.setState({ showAmazon });
@@ -117,7 +118,10 @@ class App extends Component {
       body: JSON.stringify(body)
     })
       .then(response => response.json())
-      .catch(console.log);
+      .then((response) => {
+        this.getCart(this.props.token);
+      })
+      .catch(alert);
   }
 
   render() {

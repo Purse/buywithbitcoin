@@ -1,4 +1,35 @@
 #app {
   height: 500px;
   width: 500px;
+  color: #3a4954;
+}
+
+#app .header {
+  padding-top: 40px;
+  background: #f9f9f9;
+}
+
+#app .header h2 {
+  color: rgba(0,0,0,.7);
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+#app .header p {
+  color: rgba(0,0,0,.45);
+}
+
+#app a {
+  color: #3a4954;
+  text-decoration: none;
+}
+
+#app .product {
+  padding: 20px 10px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+#app .product:last-child {
+  border-bottom-width: 0px;
 }

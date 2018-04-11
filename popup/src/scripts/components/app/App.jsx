@@ -8,7 +8,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // chrome.browserAction.enable();
     document.addEventListener('click', () => {
       this.props.dispatch({
         type: 'ADD_COUNT'
@@ -25,20 +24,14 @@ class App extends Component {
     }
     return (
       <div className="container">
-        <div className="col">
-          <div className="row">
-          Shopping as {this.props.username}!
-          </div>
-          <div className="row">
-            <div className="col">
-              <div className="row">
-                <p>Current Cart</p>
-              </div>
-            { cartItems.length &&
-              cartItems }
-            </div>
+        <div className="row">
+          <div className="col header">
+            <h2>Shopping Cart</h2>
+            <p>{this.props.username}</p>
           </div>
         </div>
+        { cartItems.length &&
+          cartItems }
       </div>
     );
   }

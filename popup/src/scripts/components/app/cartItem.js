@@ -12,12 +12,12 @@ class CartItem extends Component {
   render() {
     const productLink = `https://www.amazon.com/gp/product/${this.props.item.asin}`;
     return (
-      <div className="row">
+      <div className="row product">
         <div className="col-3">
-          <p><img src={this.props.item.images.small} /></p>
+          <img src={this.props.item.images.small} />
         </div>
         <div className="col-9">
-          <p><a target="_blank" href={productLink}>{this.props.item.name}</a></p>
+          <a target="_blank" href={productLink}>{this.props.item.name}</a>
         </div>
       </div>
     );
