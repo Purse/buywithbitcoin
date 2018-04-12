@@ -10,10 +10,11 @@ class App extends Component {
     };
     this.addToCart = this.addToCart.bind(this);
     this.getCart = this.getCart.bind(this);
+    this.hoverState = this.hoverState.bind(this);
+    this.unHoverState = this.unHoverState.bind(this);
   }
 
   componentDidMount() {
-    alert('foooooooo');
     if (document.location.host === 'purse.io' && (!this.state.token)) {
       const showAmazon = false;
       this.setState({ showAmazon });
@@ -91,7 +92,8 @@ class App extends Component {
     const fivePercentOff = (priceNum * (1 - .05)).toFixed(2);
     const thirtyThreePercentOff = (priceNum * (1 - .33)).toFixed(2);
     const percentOffText = `$${thirtyThreePercentOff} - $${fivePercentOff}`;
-    this.setState({ percentOffText });
+    const buttonText = <p>Pay <strong>{percentOffText}</strong> with Bitcoin</p>;
+    this.setState({ buttonText });
   }
 
   addToCart() {
@@ -120,12 +122,22 @@ class App extends Component {
       .then(response => response.json())
       .then((response) => {
         this.getCart(this.props.token);
+        this.setState({ buttonText: 'Added 🤙' });
       })
       .catch(alert);
+  }
+  
+  hoverState () {
+    this.setState({ buttonText: 'Add to cart' });
+  }
+  
+  unHoverState () {
+    this.grabPrice();
   }
 
   render() {
     const isAmazonAndLoggedIn = this.state.showAmazon && this.props.token;
+
     const buttonStyle = {
       display:'block',
       padding: '10px 10px 10px 30px',
@@ -143,7 +155,12 @@ class App extends Component {
     return (
       <div>
       {isAmazonAndLoggedIn &&
-        <button style={buttonStyle} onClick={this.addToCart}>Pay <b>{this.state.percentOffText}</b> with Bitcoin</button>}
+        <button style={buttonStyle} 
+                onClick={this.addToCart}
+                onMouseEnter={this.hoverState}
+                onMouseLeave={this.unHoverState}>
+          {this.state.buttonText}
+        </button>}
       </div>
     );
   }
