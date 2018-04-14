@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import CartItem from './cartItem';
+import { getUser } from '../../../../../api/user';
+import { getCart } from '../../../../../api/cart';
+import LoggedIn from './LoggedIn';
+import LoggedOut from './LoggedOut';
 
 class App extends Component {
   constructor(props) {
@@ -8,31 +11,39 @@ class App extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('click', () => {
-      this.props.dispatch({
-        type: 'ADD_COUNT'
-      });
-    });
+    if (this.props.token) {
+      getUser(this.props.token)
+        .then((username) => {
+          getCart(this.props.token)
+            .then((cart) => {
+              let items;
+              
+              if (!cart) {
+                items = [];
+              } else {
+                items = cart[0].items;
+              }
+              
+              this.props.dispatch({
+                type: 'ADD_USERNAME',
+                username: username
+              });
+              
+              this.props.dispatch({
+                type: 'ADD_CART_ITEMS',
+                items: items
+              });
+            });
+        });
+    }
   }
 
   render() {
-    let cartItems = [];
-    if (this.props.cart && this.props.cart.length) {
-      cartItems = this.props.cart.map((item, iter) => {
-        return (<CartItem key={iter} item={item} />)
-      });
-    }
+    const hasToken = this.props.token || false;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col header">
-            <h2>Shopping Cart</h2>
-            <p>{this.props.username}</p>
-          </div>
+        <div className="container">
+          { hasToken ? (<LoggedIn />) : (<LoggedOut />) }
         </div>
-        { cartItems.length &&
-          cartItems }
-      </div>
     );
   }
 }

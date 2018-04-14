@@ -12,7 +12,9 @@ const store = createStore(rootReducer, {});
 //   ],
 //   actions: [ new chrome.declarativeContent.ShowPageAction() ]
 // };
-
+// chrome.runtime.onInstalled.addListener(() => {
+//   alert('I was installedered');
+// });
 wrapStore(store, {
   portName: 'example'
 });

@@ -65,11 +65,16 @@ gulp.task('copy-scripts', ['clean'], () => {
     .pipe(gulp.dest('./build/scripts'));
 });
 
+gulp.task('copy-api', ['clean'], () => {
+  return gulp.src('api/*.js')
+    .pipe(gulp.dest('./build/api'));
+});
+
 gulp.task('clean', (cb) => {
   rimraf('./build', cb);
 });
 
-gulp.task('build', ['copy-manifest', 'copy-icons', 'copy-styles', 'copy-scripts', 'popup-js', 'popup-html', 'event-js', 'content-js']);
+gulp.task('build', ['copy-manifest', 'copy-icons', 'copy-styles', 'copy-scripts', 'copy-api', 'popup-js', 'popup-html', 'event-js', 'content-js']);
 
 gulp.task('watch', ['default'], () => {
   gulp.watch('popup/**/*', ['build']);
