@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Pay With Bitcoin Button",
-  "description": "Get 5-33% off anything on Amazon.com with Bitcoin",
+  "name": "Buy With Bitcoin",
+  "description": "Get 5-33% off anything on Amazon with Bitcoin",
   "version": "0.0.1",
   "icons": {
     "16": "icons/icon16.png",
