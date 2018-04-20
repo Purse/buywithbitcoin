@@ -85,7 +85,7 @@ class App extends Component {
           country: 'US',
           name: 'Cart',
           id: 1,
-          items: [newItem, ...this.props.cart]
+          items: this.buildCart(newItem)
         };
 
         fetch(`https://api.purse.io/api/v1/users/${this.props.username}/lists/1`, {
@@ -104,6 +104,19 @@ class App extends Component {
           })
           .catch(alert);
       });
+  }
+  
+  buildCart(item) {
+    const itemId = item.asin;
+    const itemExists = this.props
+                           .cart.findIndex(cartItem => cartItem.asin === itemId);
+    if (itemExists < 0) { // Item was not in cart already
+      return [item, ...this.props.cart];
+    } else { // Increment quantity of existing item in cart
+      const itemIndex = itemExists;
+      this.props.cart[itemIndex].quantity += 1;
+      return this.props.cart;
+    }
   }
 
   hoverState () {
