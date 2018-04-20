@@ -4,6 +4,18 @@
   color: #3a4954;
 }
 
+#app .container {
+  height: 100%;
+}
+
+#app .container .d-flex {
+  height: 100%;
+}
+
+#app .container .login {
+  text-decoration: underline;
+}
+
 #app .header {
   padding-top: 40px;
   background: #f9f9f9;

@@ -11,9 +11,9 @@ class LoggedOut extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col header">
-          <h2><a target="_blank" href="https://purse.io">Go to Purse to log in</a></h2>
+      <div className="d-flex justify-content-center align-items-center">
+        <div className="login">
+          <a target="_blank" href="https://purse.io">Go to Purse to log in</a>
         </div>
       </div>
     );
