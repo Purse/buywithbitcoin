@@ -22,21 +22,21 @@ class LoggedIn extends Component {
     
     return (
       <div>
-        <div className="row">
-          <div className="col header">
+        <div className="row header">
+          <div className="col-8">
             <h2>Shopping Cart</h2>
             <p>{this.props.username}</p>
           </div>
+          { cartItems.length &&
+            <div className="col-4">
+              <button className="checkout"
+                      onClick={this.checkout}>
+                <span>Finalize</span>
+              </button>
+            </div>
+          }
         </div>
         { cartItems.length ? cartItems : <p>You have no items in your Purse List</p> } 
-        { cartItems.length &&
-          <div className="row justify-content-center">
-            <button className="checkout"
-                    onClick={this.checkout}>
-              <span>Proceed to Checkout</span>
-            </button>
-          </div>
-        }
       </div>
     );
   }
