@@ -4,6 +4,7 @@ import { getUser } from '../../../../../api/user';
 import { getCart } from '../../../../../api/cart';
 import LoggedIn from './LoggedIn';
 import LoggedOut from './LoggedOut';
+import { getCartItems } from '../../../../../event/src/actions';
 
 class App extends Component {
   constructor(props) {
@@ -12,29 +13,7 @@ class App extends Component {
 
   componentDidMount() {
     if (this.props.token) {
-      getUser(this.props.token)
-        .then((username) => {
-          getCart(this.props.token)
-            .then((cart) => {
-              let items;
-              
-              if (!cart) {
-                items = [];
-              } else {
-                items = cart[0].items;
-              }
-              
-              this.props.dispatch({
-                type: 'ADD_USERNAME',
-                username: username
-              });
-              
-              this.props.dispatch({
-                type: 'ADD_CART_ITEMS',
-                items: items
-              });
-            });
-        });
+      this.props.dispatch(getCartItems(this.props.token));
     }
   }
 
