@@ -1,11 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducers';
+// import rootReducer from './reducers';
+import bwbtcApp from './reducers/cart';
 import thunkMiddleware from 'redux-thunk';
-import {wrapStore, alias} from 'react-chrome-redux';
+import { wrapStore, alias } from 'react-chrome-redux';
 import aliases from './aliases';
 
 const store = createStore(
-  rootReducer, 
+  bwbtcApp,
   applyMiddleware(
     alias(aliases),
     thunkMiddleware

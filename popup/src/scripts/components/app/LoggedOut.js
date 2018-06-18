@@ -24,7 +24,7 @@ const mapStateToProps = (state) => {
   return {
     count: state.count,
     token: state.token,
-    username: state.username,
+    username: state.user.name,
     cart: state.cart
   };
 };
