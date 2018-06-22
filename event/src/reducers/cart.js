@@ -3,13 +3,7 @@ const initialState = {
   user: {
     name: ''
   },
-  items: [{
-    photo: '',
-    title: '',
-    price: 0,
-    quantity: 0,
-    asin: ''
-  }]
+  items: []
 };
 
 function user(state = {}, action) {
@@ -26,7 +20,6 @@ function items(state = [], action) {
   switch (action.type) {
     case 'ADD_CART_ITEMS':
       const items = [...action.items];
-      console.log('giggity', items);
       return items;
       break;
     default:

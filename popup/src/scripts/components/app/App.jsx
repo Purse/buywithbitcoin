@@ -29,10 +29,9 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    count: state.count,
     token: state.token,
     username: state.user.name,
-    cart: state.cart
+    cart: state.items
   };
 };
 

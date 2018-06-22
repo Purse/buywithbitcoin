@@ -12,8 +12,7 @@ function fetchAddToList(originalAction) {
       body: JSON.stringify(body)
     }).then(res => res.json())
       .then(res => {
-        console.log(res);
-        return dispatch(addCartItems(res))
+        dispatch(addCartItems(res))
       })
       .catch(console.log);
   };
@@ -33,7 +32,7 @@ function fetchUsername(originalAction) {
     }).then(res => res.json())
       .then(res => {
         const { username } = res;
-        return dispatch(addUsername(username));
+        dispatch(addUsername(username));
       })
       .catch(console.log);
   }; 
@@ -50,11 +49,10 @@ function fetchCartItems(originalAction) {
         'Content-Type': 'application/json',
         'origin': 'https://purse.io'
       }
-    })
-      .then(res => res.json())
+    }).then(res => res.json())
       .then(res => {
         if (res[0] && res[0].items && res[0].items.length) {
-          return dispatch(addCartItems(res[0].items));
+          dispatch(addCartItems(res[0].items));
         }
       })
       .catch(console.log);

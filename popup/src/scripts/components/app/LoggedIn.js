@@ -5,7 +5,6 @@ import CartItem from './cartItem';
 class LoggedIn extends Component {
   constructor(props) {
     super(props);
-
   }
   
   checkout() {
@@ -47,7 +46,7 @@ const mapStateToProps = (state) => {
     count: state.count,
     token: state.token,
     username: state.user.name,
-    cart: state.cart
+    cart: state.items
   };
 };
 
