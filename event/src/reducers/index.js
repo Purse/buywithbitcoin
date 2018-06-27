@@ -1,19 +1,38 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
-import count from './count';
-import token from './token';
-import username from './username';
-import getUsername from './getUsername';
-import cart from './cart';
-import addItemToCart from './addItemToCart';
-import getCart from './getCart';
+function user(state = {}, action) {
+  switch (action.type) {
+    case 'ADD_USERNAME':
+      return { name: action.username };
+      break;
+    default:
+      return state;
+  }
+}
+
+function items(state = [], action) {
+  switch (action.type) {
+    case 'ADD_CART_ITEMS':
+      const items = [...action.items];
+      return items;
+      break;
+    default:
+      return state;
+  }
+}
+
+function token(state = '', action) {
+  switch (action.type) {
+    case 'ADD_TOKEN':
+      return action.token;
+      break;
+    default:
+      return state;
+  }
+}
 
 export default combineReducers({
-  count,
+  user,
   token,
-  getUsername,
-  username,
-  cart,
-  addItemToCart,
-  getCart
+  items
 });

@@ -1,6 +1,6 @@
 function fetchAddToList(originalAction) {
   const { token, username, body } = originalAction;
-  
+
   return (dispatch) => {
     return fetch(`https://api.purse.io/api/v1/users/${username}/lists/1`, {
       method: 'PUT',
@@ -20,7 +20,7 @@ function fetchAddToList(originalAction) {
 
 function fetchUsername(originalAction) {
   const { token } = originalAction;
-
+  
   return (dispatch) => {
     return fetch(`https://api.purse.io/api/v1/users/me`, {
       method: 'GET',

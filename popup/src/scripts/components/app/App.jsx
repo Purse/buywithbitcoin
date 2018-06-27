@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { getUser } from '../../../../../api/user';
-import { getCart } from '../../../../../api/cart';
 import LoggedIn from './LoggedIn';
 import LoggedOut from './LoggedOut';
 import { getCartItems } from '../../../../../event/src/actions';

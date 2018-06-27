@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {Store} from 'react-chrome-redux';
 
-import App from './components/app/App';
+import PurseApp from './components/app/PurseApp';
 
 const proxyStore = new Store({portName: 'buywithbtc'});
 
@@ -17,5 +17,9 @@ if (document.getElementById('price')) {
 
 
 proxyStore.ready().then(() => {
-  render(<Provider store={proxyStore}><App/></Provider>, document.getElementById('rcr-anchor'));
+  render(
+    <Provider store={proxyStore}>
+      <PurseApp/>
+    </Provider>
+   , document.getElementById('rcr-anchor'));
 });

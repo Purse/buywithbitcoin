@@ -5,7 +5,7 @@
   "description": "Get 5-33% off anything on Amazon.com with Bitcoin",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/gulp"
+    "start": "webpack --mode development"
   },
   "author": "Dylan Bathurst <dylanbathurst@gmail.com>",
   "dependencies": {
@@ -17,15 +17,14 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "gulp": "^3.9.0",
-    "gulp-load-plugins": "^1.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-util": "^3.0.7",
-    "rimraf": "^2.5.0",
-    "webpack": "^2.6.0"
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^3.0.8"
   }
 }

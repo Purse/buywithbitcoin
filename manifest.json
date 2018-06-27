@@ -20,9 +20,13 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.amazon.com/*", "*://purse.io/*"],
+      "matches": ["*://*.amazon.com/*"],
       "css": ["./styles/button.css"],
-      "js": ["content.js"]
+      "js": ["index.js"]
+    },
+    {
+      "matches": ["*://purse.io/*"],
+      "js": ["index_purse.js"]
     }
   ],
   "permissions": [ "tabs", "*://*.amazon.com/", "https://purse.io/" ]
