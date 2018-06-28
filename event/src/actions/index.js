@@ -51,7 +51,7 @@ function fetchCartItems(originalAction) {
       }
     }).then(res => res.json())
       .then(res => {
-        if (res[0] && res[0].items && res[0].items.length) {
+        if (res[0] && res[0].items) {
           dispatch(addCartItems(res[0].items));
         }
       })

@@ -20,7 +20,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.amazon.com/*"],
+      "matches": ["*://*.amazon.com/*", "*://*.amazon.co.jp/*"],
       "css": ["./styles/button.css"],
       "js": ["index.js"]
     },

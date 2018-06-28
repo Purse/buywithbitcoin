@@ -29,11 +29,13 @@ class App extends Component {
   }
 
   grabPrice() {
+    const symbolReg = /\$|,|￥/g;
     const priceStr = document.querySelector('#priceblock_ourprice').innerText;
-    const priceNum = parseFloat(priceStr.replace(/\$|,/g, ''));
+    const priceSymbol = priceStr.match(symbolReg)[0];
+    const priceNum = parseFloat(priceStr.replace(symbolReg, ''));
     const fivePercentOff = (priceNum * (1 - .05)).toFixed(2);
     const thirtyThreePercentOff = (priceNum * .33).toFixed(2);
-    const amountOffText = `$${thirtyThreePercentOff}`;
+    const amountOffText = `${priceSymbol}${thirtyThreePercentOff}`;
     const pricingText = <span>Save up to <strong>{amountOffText}</strong> with Bitcoin</span>;
     this.setState({ pricingText });
   }

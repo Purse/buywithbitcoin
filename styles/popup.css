@@ -27,7 +27,7 @@
   font-weight: 500;
 }
 
-#app .header p {
+#app .username {
   color: rgba(0,0,0,.45);
 }
 
@@ -56,4 +56,13 @@
   border-radius: 4px;
   outline: none;
   border: 1px solid #F2911B;
+}
+
+.empty-purse {
+  text-align: center;
+  margin-top: 50px;
+}
+.order-meta {
+  font-size: 12px;
+  color:#333;
 }
