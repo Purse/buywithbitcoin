@@ -19,7 +19,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.scss', '.json'],
+    extensions: ['.js', '.jsx', '.css', '.json'],
     modules: ['node_modules']
   },
 
@@ -28,6 +28,11 @@ module.exports = {
       {
         test: /\.js|jsx?$/,
         loader: 'babel-loader',
+        exclude: /(node_modules)/
+      },
+      {
+        test: /\.css?$/,
+        use: [ 'style-loader', 'css-loader' ],
         exclude: /(node_modules)/
       }
     ]
