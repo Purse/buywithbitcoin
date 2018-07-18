@@ -6,15 +6,13 @@ class CartItem extends Component {
     super(props);
   }
 
-  componentDidMount() {
-  }
-
   render() {
     const productLink = `https://www.amazon.com/gp/product/${this.props.item.asin}`;
+    const itemImage = (this.props.item.images && this.props.item.images.small) ? this.props.item.images.small: '#';
     return (
       <div className="row product">
         <div className="col-3">
-          <img src={this.props.item.images.small} />
+          <img src={itemImage} />
         </div>
         <div className="col-9">
           <a target="_blank" href={productLink}>{this.props.item.name}</a>

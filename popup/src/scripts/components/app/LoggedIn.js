@@ -44,7 +44,7 @@ class LoggedIn extends Component {
         <div className="row header">
           <div className="col-5">
             <h2>Shopping Cart</h2>
-            <p class="username">{this.props.username}</p>
+            <p className="username">{this.props.username}</p>
           </div>
           { (cartItems.length > 0) &&
             <div className="col-7">

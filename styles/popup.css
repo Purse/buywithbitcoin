@@ -46,6 +46,10 @@
   border-bottom-width: 0px;
 }
 
+#app .product img {
+  width: 100%;
+}
+
 #app .checkout {
   display: block;
   padding: 15px 30px;

@@ -4,3 +4,4 @@ build/
 build.pem
 .DS_Store
 */.DS_Store
+dist.crx
