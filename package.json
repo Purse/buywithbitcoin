@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --mode development",
-    "deploy-patch": "npm version patch && webpack --mode production && zip -r Archive ."
+    "deploy-patch": "npm version patch && webpack --mode production && zip -r ./dist/Archive ./dist"
   },
   "author": "Dylan Bathurst <dylanbathurst@gmail.com>",
   "dependencies": {
