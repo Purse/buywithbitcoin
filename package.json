@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build-dev",
-    "deploy-patch": "npx mversion patch && npm run build-prod && npm run compress-build",
-    "deploy-minor": "npx mversion minor && npm run build-prod && npm run compress-build",
-    "deploy-major": "npx mversion major && npm run build-prod && npm run compress-build",
+    "deploy-patch": "npx mversion patch -m && npm run build-prod && npm run compress-build",
+    "deploy-minor": "npx mversion minor -m && npm run build-prod && npm run compress-build",
+    "deploy-major": "npx mversion major -m && npm run build-prod && npm run compress-build",
     "build-dev": "webpack --mode development",
     "build-prod": "webpack --mode production",
     "compress-build": "zip -r ./dist/Archive ./dist"
