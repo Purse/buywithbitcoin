@@ -5,8 +5,13 @@
   "description": "Get 5-33% off anything on Amazon.com with Bitcoin",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --mode development",
-    "deploy-patch": "npm version patch && webpack --mode production && zip -r ./dist/Archive ./dist"
+    "start": "npm run build-dev",
+    "deploy-patch": "npx mversion patch && npm run build-prod && npm run compress-build",
+    "deploy-minor": "npx mversion minor && npm run build-prod && npm run compress-build",
+    "deploy-major": "npx mversion major && npm run build-prod && npm run compress-build",
+    "build-dev": "webpack --mode development",
+    "build-prod": "webpack --mode production",
+    "compress-build": "zip -r ./dist/Archive ./dist"
   },
   "author": "Dylan Bathurst <dylanbathurst@gmail.com>",
   "dependencies": {
