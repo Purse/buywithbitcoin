@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Buy With Bitcoin",
   "description": "Get 5-33% off anything on Amazon with Bitcoin",
-  "version": "0.2.4",
+  "version": "0.2.7",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -20,14 +20,30 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.amazon.com/*", "*://*.amazon.co.jp/*", "*://*.amazon.ca/*"],
-      "css": ["./styles/button.css"],
-      "js": ["index.js"]
+      "matches": [
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.jp/*",
+        "*://*.amazon.ca/*"
+      ],
+      "css": [
+        "./styles/button.css"
+      ],
+      "js": [
+        "index.js"
+      ]
     },
     {
-      "matches": ["*://purse.io/*"],
-      "js": ["index_purse.js"]
+      "matches": [
+        "*://purse.io/*"
+      ],
+      "js": [
+        "index_purse.js"
+      ]
     }
   ],
-  "permissions": [ "tabs", "*://*.amazon.com/", "https://purse.io/" ]
+  "permissions": [
+    "tabs",
+    "*://*.amazon.com/",
+    "https://purse.io/"
+  ]
 }
