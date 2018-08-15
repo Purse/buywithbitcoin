@@ -53,6 +53,10 @@ function fetchCartItems(originalAction) {
       .then(res => {
         if (res[0] && res[0].items) {
           dispatch(addCartItems(res[0].items));
+          const qty = res[0].items.map(num => num.quantity)
+            .reduce((acc, curr) => acc + curr, 0);
+          const text = (qty) ? qty.toString() : '';
+          chrome.browserAction.setBadgeText({ text });
         }
       })
       .catch(console.log);

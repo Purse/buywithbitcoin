@@ -8,32 +8,40 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttonText: '👍'
-      
+      buttonText: ''
     };
     this.addToCart = this.addToCart.bind(this);
     this.hoverState = this.hoverState.bind(this);
     this.unHoverState = this.unHoverState.bind(this);
   }
-
+  
   componentDidMount() {
+    this.setState({ buttonText: this.props.buttonText });
     this.grabAsin();
     this.grabPrice();
   }
 
   grabAsin() {
-    const asin = document.querySelector('[data-asin]').getAttribute('data-asin');
+    const asin = document.querySelector('#addToCart')
+                         .querySelector('#ASIN');
     if (asin) {
       this.setState({ asin: asin });
     }
   }
 
   grabPrice() {
+    let priceStr;
     const symbolReg = /\$|,|￥|CDN\$/g;
-    let priceStr = document.querySelector('#priceblock_ourprice');
-    if (!priceStr) {
-      priceStr = document.querySelector('#priceblock_saleprice');
+    const productForm = document.querySelector('#addToCart');
+    
+    if (productForm && productForm.querySelector('#price_inside_buybox')) {
+      priceStr = document.querySelector('#addToCart')
+        .querySelector('#price_inside_buybox');
+    } else {
+      const priceBlock = document.querySelector('#price');
+      priceStr = priceBlock.querySelector('span[id^=priceblock_ourprice]');
     }
+    
     const priceSymbol = priceStr.innerText.match(symbolReg)[0];
     const priceNum = parseFloat(priceStr.innerText.replace(symbolReg, ''));
     const fivePercentOff = (priceNum * (1 - .05)).toFixed(2);
@@ -61,7 +69,7 @@ class App extends Component {
         };
         this.props.dispatch(addItemToCart(this.props.token, this.props.username, body))
           .then(() => {
-            const buttonText = '🤙';
+            const buttonText = this.props.buttonInCart;
             this.setState({ buttonText });
           });
       });
@@ -81,15 +89,12 @@ class App extends Component {
   }
 
   hoverState () {
-    const buttonText = '☝️';
-    const defaultButtonText = this.state.buttonText;
-    this.setState({ buttonText, defaultButtonText });
+    const buttonText = this.props.buttonHover;
+    this.setState({ buttonText });
   }
 
   unHoverState () {
-    // this.grabPrice();
-    
-    const buttonText = this.state.defaultButtonText;
+    const buttonText = this.props.buttonText;
     this.setState({ buttonText });
   }
 
@@ -126,6 +131,12 @@ class App extends Component {
     );
   }
 }
+
+App.defaultProps = {
+  buttonText: '➕',
+  buttonHover: '☝️',
+  buttonInCart: '🤙'
+};
 
 const mapStateToProps = (state) => {
   return {

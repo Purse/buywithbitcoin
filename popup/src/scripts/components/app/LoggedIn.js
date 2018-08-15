@@ -26,6 +26,11 @@ class LoggedIn extends Component {
 
 		return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + tsep) + decimals;
 	}
+  
+  setBadgeText(text) {
+    text = text.toString();
+    chrome.browserAction.setBadgeText({ text });
+  }
 
   render() {
     let cartItems = [];
@@ -38,6 +43,8 @@ class LoggedIn extends Component {
         return (<CartItem key={iter} item={item} />)
       });
     }
+    
+    // this.setBadgeText(numberOfItems);
     
     return (
       <div>
