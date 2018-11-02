@@ -20,9 +20,7 @@ function fetchUpdateList(originalAction) {
       .then(async (res) => {
         const text = (res.items.length) ? res.items.length.toString() : '' ;
         chrome.browserAction.setBadgeText({ text });
-        console.log('adding new items to redux', res);
-        await dispatch(addCartItems(res))
-        console.log('done adding new items to redux');
+        await dispatch(addCartItems(res.items))
       })
       .catch(console.log);
   };
@@ -63,8 +61,6 @@ function fetchCartItems(originalAction) {
       .then(res => {
         if (res[0] && res[0].items) {
           dispatch(addCartItems(res[0].items));
-          // const qty = res[0].items.map(num => num.quantity)
-          //   .reduce((acc, curr) => acc + curr, 0);
           const text = (res[0].items.length) ? res[0].items.length.toString() : '' ;
           chrome.browserAction.setBadgeText({ text });
         }

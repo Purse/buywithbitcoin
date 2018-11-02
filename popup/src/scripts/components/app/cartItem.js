@@ -29,6 +29,7 @@ class CartItem extends Component {
       id: 1,
       items: this.decrementProduct(asin)
     };
+
     await dispatch(removeItemFromCart(token, username, body));
   }
   
@@ -52,7 +53,6 @@ class CartItem extends Component {
   }
 
   render() {
-    console.log('I am rendering now.');
     const { item } = this.props;
     const productLink = `https://www.amazon.com/gp/product/${item.asin}`;
     const itemImage = (item.images && item.images.small) ? item.images.small: '#';
