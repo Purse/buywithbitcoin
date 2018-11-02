@@ -37,6 +37,7 @@
 }
 
 #app .product {
+  position: relative;
   padding: 20px 10px;
   background: #fff;
   border-bottom: 1px solid #eee;
@@ -48,6 +49,32 @@
 
 #app .product img {
   width: 100%;
+}
+
+#app .product .product-actions {
+  background-color: rgba(0, 0, 0, .2);
+  color: #fff;
+  position: absolute;
+  width: 50px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  padding-top: 20px;
+}
+
+#app .product .product-actions span {
+  background-color: rgba(255, 255, 255, .7);
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.4);
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  border-radius: 20px;
+}
+
+#app .product .product-actions span:hover {
+  color: rgba(0, 0, 0, 0.8);
 }
 
 #app .checkout {

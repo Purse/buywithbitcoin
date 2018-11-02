@@ -23,7 +23,7 @@ class App extends Component {
 
   grabAsin() {
     const asin = document.querySelector('#addToCart')
-                         .querySelector('#ASIN');
+                         .querySelector('#ASIN').value;
     if (asin) {
       this.setState({ asin: asin });
     }
@@ -109,7 +109,7 @@ class App extends Component {
 
     return (
       <div className='dislayStyle'>
-      {isLoggedIn &&
+      {isLoggedIn && this.state.asin &&
         <div className='buttonWrapStyle'
              onClick={this.addToCart}
              onMouseEnter={this.hoverState}

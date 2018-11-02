@@ -11,9 +11,9 @@ class LoggedIn extends Component {
   checkout() {
     window.open('https://purse.io/checkout/nyd');
   }
-  
+
   numberFormat(number, dec, dsep, tsep) {
-		if (isNaN(number) || number == null) {
+	  if (isNaN(number) || number == null) {
 			return '';
 		}
 
@@ -26,13 +26,9 @@ class LoggedIn extends Component {
 
 		return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + tsep) + decimals;
 	}
-  
-  setBadgeText(text) {
-    text = text.toString();
-    chrome.browserAction.setBadgeText({ text });
-  }
 
   render() {
+    console.log('rennnnnnndering', this.props);
     let cartItems = [];
     let totalCost = 0;
     let numberOfItems = 0;
@@ -43,8 +39,6 @@ class LoggedIn extends Component {
         return (<CartItem key={iter} item={item} />)
       });
     }
-    
-    // this.setBadgeText(numberOfItems);
     
     return (
       <div>

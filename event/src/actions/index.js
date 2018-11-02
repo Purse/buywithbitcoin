@@ -1,4 +1,10 @@
-function fetchAddToList(originalAction) {
+import 'babel-polyfill';
+
+function fetchRemoveItem(originalAction) {
+  
+}
+
+function fetchUpdateList(originalAction) {
   const { token, username, body } = originalAction;
 
   return (dispatch) => {
@@ -11,8 +17,12 @@ function fetchAddToList(originalAction) {
       },
       body: JSON.stringify(body)
     }).then(res => res.json())
-      .then(res => {
-        dispatch(addCartItems(res))
+      .then(async (res) => {
+        const text = (res.items.length) ? res.items.length.toString() : '' ;
+        chrome.browserAction.setBadgeText({ text });
+        console.log('adding new items to redux', res);
+        await dispatch(addCartItems(res))
+        console.log('done adding new items to redux');
       })
       .catch(console.log);
   };
@@ -53,9 +63,9 @@ function fetchCartItems(originalAction) {
       .then(res => {
         if (res[0] && res[0].items) {
           dispatch(addCartItems(res[0].items));
-          const qty = res[0].items.map(num => num.quantity)
-            .reduce((acc, curr) => acc + curr, 0);
-          const text = (qty) ? qty.toString() : '';
+          // const qty = res[0].items.map(num => num.quantity)
+          //   .reduce((acc, curr) => acc + curr, 0);
+          const text = (res[0].items.length) ? res[0].items.length.toString() : '' ;
           chrome.browserAction.setBadgeText({ text });
         }
       })
@@ -70,6 +80,15 @@ function addItemToCart(token, username, body) {
     username,
     body
   }
+}
+
+function removeItemFromCart(token, username, body) {
+  return {
+    type: 'REMOVE_FROM_CART',
+    token,
+    username,
+    body
+  };
 }
 
 function getUsername(token) {
@@ -108,4 +127,4 @@ function addToken(token) {
 }
 
 export { addUsername, addCartItems, getUsername, getCartItems, addItemToCart,
-         addToken, fetchUsername, fetchCartItems, fetchAddToList };
+         addToken, fetchUsername, fetchCartItems, fetchUpdateList, removeItemFromCart };
