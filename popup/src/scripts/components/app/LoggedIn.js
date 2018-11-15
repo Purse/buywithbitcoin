@@ -28,7 +28,6 @@ class LoggedIn extends Component {
 	}
 
   render() {
-    console.log('rennnnnnndering', this.props);
     let cartItems = [];
     let totalCost = 0;
     let numberOfItems = 0;

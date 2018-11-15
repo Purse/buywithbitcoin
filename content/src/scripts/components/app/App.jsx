@@ -33,8 +33,11 @@ class App extends Component {
     let priceStr;
     const symbolReg = /\$|,|￥|CDN\$/g;
     const productForm = document.querySelector('#addToCart');
+    const dealPrice = document.querySelector('#priceblock_dealprice');
     
-    if (productForm && productForm.querySelector('#price_inside_buybox')) {
+    if (dealPrice) {
+      priceStr = dealPrice;
+    } else if (productForm && productForm.querySelector('#price_inside_buybox')) {
       priceStr = document.querySelector('#addToCart')
         .querySelector('#price_inside_buybox');
     } else {
