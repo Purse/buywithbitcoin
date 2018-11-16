@@ -12,15 +12,15 @@ class CartItem extends Component {
     this.unHoverState = this.unHoverState.bind(this);
     this.decrementProduct = this.decrementProduct.bind(this);
   }
-  
+
   hoverState() {
     // this.setState({ showHud: true });
   }
-  
+
   unHoverState() {
     // this.setState({ showHud: true });
   }
-  
+
   async cartUpdate(asin) {
     const { token, username, dispatch } = this.props;
     const body = {
@@ -32,7 +32,7 @@ class CartItem extends Component {
 
     await dispatch(removeItemFromCart(token, username, body));
   }
-  
+
   decrementProduct(asin) {
     let needsRemoval;
     let cart = this.props.cart.map((item, index) => {
@@ -44,11 +44,11 @@ class CartItem extends Component {
       }
       return item;
     });
-    
+
     if (needsRemoval >= 0) {
       cart.splice(needsRemoval, 1);
     }
-    
+
     return cart;
   }
 
@@ -64,7 +64,7 @@ class CartItem extends Component {
           <span>{item.quantity}</span>
           <img src={itemImage} />
         </div>
-        <div className="col-9">
+        <div className="col-8">
           <a target="_blank" href={productLink}>{item.name}</a>
         </div>
         { this.state.showHud &&

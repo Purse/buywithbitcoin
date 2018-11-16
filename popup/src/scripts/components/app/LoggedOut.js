@@ -13,7 +13,8 @@ class LoggedOut extends Component {
     return (
       <div className="d-flex justify-content-center align-items-center">
         <div className="login">
-          <a target="_blank" href="https://purse.io">Go to Purse to log in</a>
+        <img src="https://purse.io/images/bold-icons/cart2.svg" />
+          <a target="_blank" href="https://purse.io">Connect Your Account</a>
         </div>
       </div>
     );
