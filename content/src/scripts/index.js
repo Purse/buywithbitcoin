@@ -9,8 +9,10 @@ const proxyStore = new Store({portName: 'buywithbtc'});
 
 const anchor = document.createElement('div');
 anchor.id = 'rcr-anchor';
-if (document.getElementById('price')) {
+if (document.getElementById('price') && document.getElementById('price').offsetWidth > 0) {
   document.getElementById('price').after(anchor);
+} else if (document.getElementById('unifiedPrice_feature_div')) {
+  document.getElementById('unifiedPrice_feature_div').after(anchor);
 } else {
   document.getElementById('top').after(anchor);
 }

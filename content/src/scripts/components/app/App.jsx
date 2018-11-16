@@ -34,12 +34,15 @@ class App extends Component {
     const symbolReg = /\$|,|￥|CDN\$/g;
     const productForm = document.querySelector('#addToCart');
     const dealPrice = document.querySelector('#priceblock_dealprice');
+    const snsPrice = document.querySelector('#priceblock_snsprice_Based');
     
     if (dealPrice) {
       priceStr = dealPrice;
     } else if (productForm && productForm.querySelector('#price_inside_buybox')) {
       priceStr = document.querySelector('#addToCart')
         .querySelector('#price_inside_buybox');
+    } else if (snsPrice) {
+      priceStr = snsPrice;
     } else {
       const priceBlock = document.querySelector('#price');
       priceStr = priceBlock.querySelector('span[id^=priceblock_ourprice]');
