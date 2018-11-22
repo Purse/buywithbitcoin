@@ -13,6 +13,7 @@ class App extends Component {
     this.addToCart = this.addToCart.bind(this);
     this.hoverState = this.hoverState.bind(this);
     this.unHoverState = this.unHoverState.bind(this);
+    this.turnClock = this.turnClock.bind(this);
   }
   
   componentDidMount() {
@@ -56,8 +57,16 @@ class App extends Component {
     const pricingText = <span>Save up to <strong>{amountOffText}</strong> with Bitcoin</span>;
     this.setState({ pricingText });
   }
-
+  turnClock() {
+    const currentTurn = this.props.addingToCart.shift();
+    this.props.addingToCart.push(currentTurn);
+    this.setState({ buttonText: currentTurn});  
+  }
   addToCart() {
+    
+    const addingtoCartInterval = setInterval(this.turnClock, 300);
+    this.setState({addingtoCartInterval});
+    
     const newItem = {
       asin: this.state.asin,
       quantity: 1,
@@ -75,6 +84,7 @@ class App extends Component {
         };
         this.props.dispatch(addItemToCart(this.props.token, this.props.username, body))
           .then(() => {
+            clearInterval(this.state.addingtoCartInterval);
             const buttonText = this.props.buttonInCart;
             this.setState({ buttonText });
           });
@@ -141,7 +151,8 @@ class App extends Component {
 App.defaultProps = {
   buttonText: '➕',
   buttonHover: '☝️',
-  buttonInCart: '🤙'
+  buttonInCart: '🤙',
+  addingToCart: ['🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚','🕛']
 };
 
 const mapStateToProps = (state) => {
