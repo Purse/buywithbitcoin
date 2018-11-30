@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 
 function user(state = {}, action) {
   switch (action.type) {
-    case 'ADD_USERNAME':
-      return { name: action.username };
+    case 'ADD_USERINFO':
+      return { ...action.user };
       break;
     default:
       return state;

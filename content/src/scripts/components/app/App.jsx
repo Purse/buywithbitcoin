@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../../../../../styles/amazon.button.css';
-import { getUsername, addUsername,
+import { addUsername,
          getCartItems, addItemToCart } from '../../../../../event/src/actions/index';
 
 class App extends Component {
@@ -158,7 +158,7 @@ App.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     token: state.token,
-    username: state.user.name,
+    username: state.user.username,
     cart: state.items
   };
 };

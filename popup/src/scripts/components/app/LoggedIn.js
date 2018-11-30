@@ -39,28 +39,44 @@ class LoggedIn extends Component {
       });
     }
     
+    const { username, picture, first_name, last_name, wallet } = this.props.user;
+    
     return (
       <div>
         <div className="row header">
-          <div className="col-5">
-            <h2>Shopping Cart</h2>
-            <p className="username">{this.props.username}</p>
+          <div className="col-2 avatar">
+            <img src={picture} />
+          </div>
+          <div className="col-6">
+            <p className="username">
+            { (first_name && last_name) ? `${first_name} ${last_name}` : `${username}` }
+            </p>
+            <p className="balances">
+              <span className="balance">
+                {wallet.BTC.balance.total} <span className="crypto-label">btc</span>
+              </span>
+              <span className="balance">
+                {wallet.BCH.balance.total} <span className="crypto-label">bch</span>
+              </span>
+            </p>
+            { (cartItems.length > 0) &&
+            <p className="cart-meta">
+              <span className="item-count">
+                {numberOfItems} <span className="item-count-label">{(numberOfItems === 1) ? 'item': 'items'}</span>
+              </span>
+              <span className="cart-cost">
+                ${this.numberFormat(totalCost, 2)} <span className="cart-cost-label">{this.props.cart[0].currency}</span>
+              </span>
+            </p>
+            }
           </div>
           { (cartItems.length > 0) &&
-            <div className="col-7">
-              <div className="row">
-                <div className="col-5 text-right order-meta">
-                  <p>{numberOfItems} Item(s)</p>
-                  <p>{this.numberFormat(totalCost, 2)}</p>
-                </div>
-                <div className="col-7">
-                  <button className="checkout"
-                          onClick={this.checkout}>
-                    <span>Finalize</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div className="col-4">
+            <button className="checkout"
+                    onClick={this.checkout}>
+              <span>Finalize</span>
+            </button>
+          </div>
           }
         </div>
         { cartItems.length ? cartItems : <p className="empty-purse">You have no items in your Purse List</p> } 
@@ -73,7 +89,8 @@ const mapStateToProps = (state) => {
   return {
     count: state.count,
     token: state.token,
-    username: state.user.name,
+    user: state.user,
+    username: state.user.username,
     cart: state.items
   };
 };

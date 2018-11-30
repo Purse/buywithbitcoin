@@ -21,13 +21,4 @@ class LoggedOut extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    count: state.count,
-    token: state.token,
-    username: state.user.name,
-    cart: state.cart
-  };
-};
-
-export default connect(mapStateToProps)(LoggedOut);
+export default connect()(LoggedOut);

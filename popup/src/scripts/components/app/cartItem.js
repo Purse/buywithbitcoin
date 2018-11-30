@@ -64,13 +64,14 @@ class CartItem extends Component {
           <span>{item.quantity}</span>
           <img src={itemImage} />
         </div>
-        <div className="col-8">
-          <a target="_blank" href={productLink}>{item.name}</a>
+        <div className="col-8 product-meta">
+          <a target="_blank" href={productLink} title={item.name}>{item.name}</a>
+          <p>${item.fiat_price} <span className="currency">{item.currency}</span></p>
         </div>
         { this.state.showHud &&
           <div className="product-actions">
             <span onClick={() => { this.cartUpdate(item.asin) }}>
-              X
+              x
             </span>
           </div>
         }
@@ -83,7 +84,7 @@ const mapStateToProps = (state) => {
   return {
     count: state.count,
     token: state.token,
-    username: state.user.name,
+    username: state.user.username,
     cart: state.items
   };
 };

@@ -9,12 +9,13 @@
     "deploy-patch": "npx mversion patch -m && npm run build-prod && npm run compress-build",
     "deploy-minor": "npx mversion minor -m && npm run build-prod && npm run compress-build",
     "deploy-major": "npx mversion major -m && npm run build-prod && npm run compress-build",
-    "build-dev": "webpack --mode development",
-    "build-prod": "webpack --mode production",
+    "build-dev": "./node_modules/.bin/webpack --mode development",
+    "build-prod": "./node_modules/.bin/webpack --mode production",
     "compress-build": "zip -r ./dist/Archive ./dist"
   },
   "author": "Dylan Bathurst <dylanbathurst@gmail.com>",
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "react": "^16.3.0",
     "react-chrome-redux": "^2.0.0-alpha.1",
     "react-dom": "^16.3.0",
@@ -23,11 +24,12 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^0.28.11",

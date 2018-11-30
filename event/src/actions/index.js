@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 function fetchRemoveItem(originalAction) {
   
@@ -26,7 +26,7 @@ function fetchUpdateList(originalAction) {
   };
 }
 
-function fetchUsername(originalAction) {
+function fetchUserInfo(originalAction) {
   const { token } = originalAction;
   
   return (dispatch) => {
@@ -39,8 +39,7 @@ function fetchUsername(originalAction) {
       }
     }).then(res => res.json())
       .then(res => {
-        const { username } = res;
-        dispatch(addUsername(username));
+        dispatch(addUserInfo(res));
       })
       .catch(console.log);
   }; 
@@ -87,17 +86,17 @@ function removeItemFromCart(token, username, body) {
   };
 }
 
-function getUsername(token) {
+function getUserInfo(token) {
   return {
-    type: 'GET_USERNAME',
+    type: 'GET_USERINFO',
     token
   };
 }
 
-function addUsername(username) {
+function addUserInfo(user) {
   return {
-    type: 'ADD_USERNAME',
-    username
+    type: 'ADD_USERINFO',
+    user
   };
 }
 
@@ -122,5 +121,5 @@ function addToken(token) {
   };
 }
 
-export { addUsername, addCartItems, getUsername, getCartItems, addItemToCart,
-         addToken, fetchUsername, fetchCartItems, fetchUpdateList, removeItemFromCart };
+export { addUserInfo, addCartItems, getUserInfo, getCartItems, addItemToCart,
+         addToken, fetchUserInfo, fetchCartItems, fetchUpdateList, removeItemFromCart };
