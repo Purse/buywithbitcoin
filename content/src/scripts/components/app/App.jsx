@@ -36,7 +36,8 @@ class App extends Component {
     const productForm = document.querySelector('#addToCart');
     const dealPrice = document.querySelector('#priceblock_dealprice');
     const snsPrice = document.querySelector('#priceblock_snsprice_Based');
-    
+    const bookPrice = document.querySelector('.a-color-price.offer-price');
+    console.log('fooooo', bookPrice)
     if (dealPrice) {
       priceStr = dealPrice;
     } else if (productForm && productForm.querySelector('#price_inside_buybox')) {
@@ -44,6 +45,8 @@ class App extends Component {
         .querySelector('#price_inside_buybox');
     } else if (snsPrice) {
       priceStr = snsPrice;
+    } else if (bookPrice) {
+      priceStr = bookPrice;
     } else {
       const priceBlock = document.querySelector('#price');
       priceStr = priceBlock.querySelector('span[id^=priceblock_ourprice]');

@@ -13,6 +13,8 @@ if (document.getElementById('price') && document.getElementById('price').offsetW
   document.getElementById('price').after(anchor);
 } else if (document.getElementById('unifiedPrice_feature_div')) {
   document.getElementById('unifiedPrice_feature_div').after(anchor);
+} else if (document.getElementById('tmmSwatches')) {
+  document.getElementById('tmmSwatches').after(anchor);
 } else {
   document.getElementById('top').after(anchor);
 }
