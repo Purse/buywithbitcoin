@@ -37,7 +37,7 @@ class App extends Component {
     const dealPrice = document.querySelector('#priceblock_dealprice');
     const snsPrice = document.querySelector('#priceblock_snsprice_Based');
     const bookPrice = document.querySelector('.a-color-price.offer-price');
-    console.log('fooooo', bookPrice)
+
     if (dealPrice) {
       priceStr = dealPrice;
     } else if (productForm && productForm.querySelector('#price_inside_buybox')) {
