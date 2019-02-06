@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { removeItemFromCart } from '../../../../../event/src/actions';
+import { removeItemFromCart } from '../../event/actions';
 
 class CartItem extends Component {
   constructor(props) {

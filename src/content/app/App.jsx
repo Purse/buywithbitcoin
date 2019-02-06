@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../../../../../styles/amazon.button.css';
+import '../../styles/amazon.button.css';
 import { addUsername,
-         getCartItems, addItemToCart } from '../../../../../event/src/actions/index';
+         getCartItems, addItemToCart } from '../../event/actions/index';
 
 class App extends Component {
   constructor(props) {

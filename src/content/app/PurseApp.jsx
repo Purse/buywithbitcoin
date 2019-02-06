@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToken, getUserInfo,
-  getCartItems } from '../../../../../event/src/actions/index';
+  getCartItems } from '../../event/actions/index';
 
 class App extends Component {
   constructor(props) {

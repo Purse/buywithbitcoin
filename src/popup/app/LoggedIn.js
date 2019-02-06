@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartItem from './cartItem';
-import '../../../../../styles/popup.css';
+import '../../styles/popup.css';
 
 class LoggedIn extends Component {
   constructor(props) {
