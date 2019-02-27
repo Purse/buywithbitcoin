@@ -9,7 +9,7 @@ class LoggedIn extends Component {
   }
   
   checkout() {
-    window.open('https://purse.io/checkout/nyd');
+    window.open('https://purse.io/checkout/nyd?ref=ChromePurse');
   }
 
   numberFormat(number, dec, dsep, tsep) {
