@@ -88,7 +88,6 @@
 }
 
 #app .product .product-actions {
-  background-color: rgba(0, 0, 0, .04);
   color: #fff;
   position: absolute;
   width: 50px;
@@ -100,9 +99,9 @@
 }
 
 #app .product .product-actions span {
-  background-color: rgba(255, 255, 255, .7);
+  background-color: rgba(0, 0, 0, .2);
   cursor: pointer;
-  color: #9BABB8;
+  color: #fff;
   width: 25px;
   height: 25px;
   display: inline-block;
@@ -110,7 +109,7 @@
 }
 
 #app .product .product-actions span:hover {
-  color: #6A8294;
+  background-color: rgba(0, 0, 0, .4);
 }
 
 #app .checkout {
