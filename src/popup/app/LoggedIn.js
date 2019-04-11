@@ -11,6 +11,10 @@ class LoggedIn extends Component {
   checkout() {
     window.open('https://purse.io/checkout/nyd?ref=ChromePurse');
   }
+  
+  goToAmazon() {
+    window.open('https://www.amazon.com');
+  }
 
   numberFormat(number, dec, dsep, tsep) {
 	  if (isNaN(number) || number == null) {
@@ -43,43 +47,17 @@ class LoggedIn extends Component {
     
     return (
       <div>
-        <div className="row header">
-          <div className="col-2 avatar">
-            <img src={picture} />
+      { cartItems.length 
+        ? cartItems 
+        : <div className="empty-cart-container">
+            <p className="empty-purse">Your Purse shopping cart is empty.</p>
+            <button className="btn primary"
+                    onClick={this.goToAmazon}>Shop on Amazon</button>  
+            <p><a href="https://support.purse.io/">Contact Us</a></p>
+            <p><a href="https://purse.io/how-it-works">How it Works</a></p>
+            <p><a href="https://purse.io">Purse.io</a></p>
           </div>
-          <div className="col-6">
-            <p className="username">
-            { (first_name && last_name) ? `${first_name} ${last_name}` : `${username}` }
-            </p>
-            <p className="balances">
-              <span className="balance">
-                {wallet.BTC.balance.total} <span className="crypto-label">btc</span>
-              </span>
-              <span className="balance">
-                {wallet.BCH.balance.total} <span className="crypto-label">bch</span>
-              </span>
-            </p>
-            { (cartItems.length > 0) &&
-            <p className="cart-meta">
-              <span className="item-count">
-                {numberOfItems} <span className="item-count-label">{(numberOfItems === 1) ? 'item': 'items'}</span>
-              </span>
-              <span className="cart-cost">
-                ${this.numberFormat(totalCost, 2)} <span className="cart-cost-label">{this.props.cart[0].currency}</span>
-              </span>
-            </p>
-            }
-          </div>
-          { (cartItems.length > 0) &&
-          <div className="col-4">
-            <button className="checkout"
-                    onClick={this.checkout}>
-              <span>Finalize</span>
-            </button>
-          </div>
-          }
-        </div>
-        { cartItems.length ? cartItems : <p className="empty-purse">You have no items in your Purse List</p> } 
+      } 
       </div>
     );
   }
