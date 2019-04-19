@@ -77,6 +77,15 @@ function addItemToCart(token, username, body) {
   }
 }
 
+function updateCartItems(token, username, body) {
+  return {
+    type: 'UPDATE_CART_ITEMS',
+    token,
+    username,
+    body
+  };
+}
+
 function removeItemFromCart(token, username, body) {
   return {
     type: 'REMOVE_FROM_CART',
@@ -122,4 +131,4 @@ function addToken(token) {
 }
 
 export { addUserInfo, addCartItems, getUserInfo, getCartItems, addItemToCart,
-         addToken, fetchUserInfo, fetchCartItems, fetchUpdateList, removeItemFromCart };
+         addToken, fetchUserInfo, fetchCartItems, fetchUpdateList, removeItemFromCart, updateCartItems };

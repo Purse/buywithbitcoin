@@ -142,10 +142,10 @@ class App extends Component {
           </button>
         </div>}
       {isNotLoggedIn &&
-        <button className='buttonStyle'
-                  onClick={this.navToPurse}>
-            <p>Log in at Purse.io</p>
-          </button>}
+        <button className='unAuthed'
+                onClick={this.navToPurse}>
+          Log in at Purse.io
+        </button>}
       </div>
     );
   }

@@ -31,8 +31,19 @@ function token(state = '', action) {
   }
 }
 
+function discount(state = 0.05, action) {
+  switch (action.type) {
+    case 'SET_DISCOUNT':
+        return action.discount;
+      break;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   user,
   token,
-  items
+  items,
+  discount
 });

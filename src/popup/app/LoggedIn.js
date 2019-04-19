@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartItem from './cartItem';
+import CartCheckout from './cartCheckout';
 import '../../styles/popup.css';
 
 class LoggedIn extends Component {
@@ -46,18 +47,29 @@ class LoggedIn extends Component {
     const { username, picture, first_name, last_name, wallet } = this.props.user;
     
     return (
-      <div>
-      { cartItems.length 
-        ? cartItems 
-        : <div className="empty-cart-container">
-            <p className="empty-purse">Your Purse shopping cart is empty.</p>
-            <button className="btn primary"
-                    onClick={this.goToAmazon}>Shop on Amazon</button>  
-            <p><a href="https://support.purse.io/">Contact Us</a></p>
-            <p><a href="https://purse.io/how-it-works">How it Works</a></p>
-            <p><a href="https://purse.io">Purse.io</a></p>
-          </div>
-      } 
+      <div className="row">
+        { (cartItems.length)
+          ? <div className="col">
+              <div className="row header no-gutters">
+               <CartCheckout />
+             </div>
+             <div className="row content">
+               <div className="col">
+                 {cartItems}
+               </div>
+             </div>
+           </div>
+          : <div className="col">
+              <div className="empty-cart-container">
+                <p className="empty-purse">Your Purse shopping cart is empty.</p>
+                <button className="btn primary"
+                        onClick={this.goToAmazon}>Shop on Amazon</button>  
+                <p><a href="https://support.purse.io/">Contact Us</a></p>
+                <p><a href="https://purse.io/how-it-works">How it Works</a></p>
+                <p><a href="https://purse.io">Purse.io</a></p>
+              </div>
+            </div>
+        } 
       </div>
     );
   }

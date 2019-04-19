@@ -1,39 +1,40 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { removeItemFromCart } from '../../event/actions';
+import { removeItemFromCart, updateCartItems } from '../../event/actions';
 
 class CartItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showHud: true
-    };
-    this.hoverState = this.hoverState.bind(this);
-    this.unHoverState = this.unHoverState.bind(this);
+    this.state = {};
     this.decrementProduct = this.decrementProduct.bind(this);
+    this.incrementProduct = this.incrementProduct.bind(this);
+    this.discountedPrice = this.discountedPrice.bind(this);
+  }
+  
+  componentDidMount() {
+    this.discountedPrice();
   }
 
-  hoverState() {
-    // this.setState({ showHud: true });
+  discountedPrice() {
+    const discount = this.props.discount;
+    let discountedPrice = parseFloat(this.props.item.fiat_price * (1 - discount));
+    discountedPrice = discountedPrice.toFixed(2);
+    this.setState({ discountedPrice });
   }
 
-  unHoverState() {
-    // this.setState({ showHud: true });
-  }
-
-  async cartUpdate(asin) {
+  async cartUpdate(newCart) {
     const { token, username, dispatch } = this.props;
     const body = {
       country: 'US',
       name: 'Cart',
       id: 1,
-      items: this.decrementProduct(asin)
+      items: newCart
     };
 
-    await dispatch(removeItemFromCart(token, username, body));
+    await dispatch(updateCartItems(token, username, body));
   }
 
-  decrementProduct(asin) {
+  async decrementProduct(asin) {
     let needsRemoval;
     let cart = this.props.cart.map((item, index) => {
       if (item.asin === asin) {
@@ -49,32 +50,38 @@ class CartItem extends Component {
       cart.splice(needsRemoval, 1);
     }
 
-    return cart;
+    await this.cartUpdate(cart);
   }
 
+  async incrementProduct(asin) {
+    let cart = this.props.cart.map((item, index) => {
+      if (item.asin === asin && item.quantity < item.quantity_available) {
+        item.quantity += 1;
+      }
+      return item;
+    });
+
+    await this.cartUpdate(cart);
+  }
   render() {
     const { item } = this.props;
     const productLink = `https://www.amazon.com/gp/product/${item.asin}`;
     const itemImage = (item.images && item.images.small) ? item.images.small: '#';
     return (
-      <div className="row product"
-           onMouseEnter={this.hoverState}
-           onMouseLeave={this.unHoverState} >
+      <div className="row product">
         <div className="col-3">
-          <span>{item.quantity}</span>
           <img src={itemImage} />
         </div>
-        <div className="col-8 product-meta">
-          <a target="_blank" href={productLink} title={item.name}>{item.name}</a>
-          <p>${item.fiat_price} <span className="currency">{item.currency}</span></p>
+        <div className="col-6 product-meta">
+          <p onClick={() => {window.open(productLink)}}>{item.name}</p>
+          <p><span className="orig-price">${item.fiat_price}</span> 
+          <span className="discounted-price">${this.state.discountedPrice || 0}</span></p>
         </div>
-        { this.state.showHud &&
-          <div className="product-actions">
-            <span onClick={() => { this.cartUpdate(item.asin) }}>
-              x
-            </span>
-          </div>
-        }
+        <div className="col-3 product-actions">
+          <span onClick={() => { this.decrementProduct(item.asin) }}>&mdash;</span>
+          <span>{item.quantity}</span>
+          <span onClick={() => { this.incrementProduct(item.asin) }}>+</span>
+        </div>
       </div>
     );
   }
@@ -85,7 +92,8 @@ const mapStateToProps = (state) => {
     count: state.count,
     token: state.token,
     username: state.user.username,
-    cart: state.items
+    cart: state.items,
+    discount: state.discount
   };
 };
 
