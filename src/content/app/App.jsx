@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../../styles/amazon.button.css';
-import { addUsername,
-         getCartItems, addItemToCart } from '../../event/actions/index';
+import { addUsername, getCartItems, updateCartItems } from '../../event/actions/index';
 
 class App extends Component {
   constructor(props) {
@@ -66,7 +65,6 @@ class App extends Component {
     this.setState({ buttonText: currentTurn});  
   }
   addToCart() {
-    
     const addingtoCartInterval = setInterval(this.turnClock, 300);
     this.setState({addingtoCartInterval});
     
@@ -83,9 +81,10 @@ class App extends Component {
           country: 'US',
           name: 'Cart',
           id: 1,
+          ref: 'chrome-ext',
           items: this.buildCart(newItem)
         };
-        this.props.dispatch(addItemToCart(this.props.token, this.props.username, body))
+        this.props.dispatch(updateCartItems(this.props.token, this.props.username, body))
           .then(() => {
             clearInterval(this.state.addingtoCartInterval);
             const buttonText = this.props.buttonInCart;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { removeItemFromCart, updateCartItems } from '../../event/actions';
+import { updateCartItems } from '../../event/actions';
 
 class CartItem extends Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class CartItem extends Component {
       country: 'US',
       name: 'Cart',
       id: 1,
+      ref: 'chrome-ext',
       items: newCart
     };
 

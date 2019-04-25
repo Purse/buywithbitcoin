@@ -1,9 +1,5 @@
 import '@babel/polyfill';
 
-function fetchRemoveItem(originalAction) {
-  
-}
-
 function fetchUpdateList(originalAction) {
   const { token, username, body } = originalAction;
 
@@ -68,27 +64,9 @@ function fetchCartItems(originalAction) {
   };
 }
 
-function addItemToCart(token, username, body) {
-  return {
-    type: 'ADD_TO_CART',
-    token,
-    username,
-    body
-  }
-}
-
 function updateCartItems(token, username, body) {
   return {
     type: 'UPDATE_CART_ITEMS',
-    token,
-    username,
-    body
-  };
-}
-
-function removeItemFromCart(token, username, body) {
-  return {
-    type: 'REMOVE_FROM_CART',
     token,
     username,
     body
@@ -130,5 +108,5 @@ function addToken(token) {
   };
 }
 
-export { addUserInfo, addCartItems, getUserInfo, getCartItems, addItemToCart,
-         addToken, fetchUserInfo, fetchCartItems, fetchUpdateList, removeItemFromCart, updateCartItems };
+export { addUserInfo, addCartItems, getUserInfo, getCartItems, addToken, 
+         fetchUserInfo, fetchCartItems, fetchUpdateList, updateCartItems };
