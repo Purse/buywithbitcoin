@@ -14,7 +14,7 @@ class CartCheckout extends Component {
     return (total * (1 - this.props.discount)).toFixed(2);
   }
   goToCheckout() {
-    window.open('https://purse.io/checkout/nyd?ref=ChromePurse');
+    window.open('https://purse.io/checkout/nyd');
   }
   render() {
     const cartTotal = this.calcTotal();

@@ -81,7 +81,6 @@ class App extends Component {
           country: 'US',
           name: 'Cart',
           id: 1,
-          ref: 'chrome-ext',
           items: this.buildCart(newItem)
         };
         this.props.dispatch(updateCartItems(this.props.token, this.props.username, body))
