@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { updateCartItems } from '../../event/actions';
+import Product from '../../styles/Product';
 
 class CartItem extends Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class CartItem extends Component {
     const productLink = `https://www.amazon.com/gp/product/${item.asin}`;
     const itemImage = (item.images && item.images.small) ? item.images.small: '#';
     return (
-      <div className="row product">
+      <Product className="row">
         <div className="col-3">
           <img src={itemImage} />
         </div>
@@ -82,7 +83,7 @@ class CartItem extends Component {
           <span>{item.quantity}</span>
           <span onClick={() => { this.incrementProduct(item.asin) }}>+</span>
         </div>
-      </div>
+      </Product>
     );
   }
 }

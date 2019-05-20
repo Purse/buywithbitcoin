@@ -9,6 +9,7 @@ class App extends Component {
     this.state = {
       buttonText: ''
     };
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.hoverState = this.hoverState.bind(this);
     this.unHoverState = this.unHoverState.bind(this);
@@ -19,14 +20,31 @@ class App extends Component {
     this.setState({ buttonText: this.props.buttonText });
     this.grabAsin();
     this.grabPrice();
+    this.listenForStyleSwitch();
   }
 
   grabAsin() {
-    const asin = document.querySelector('#addToCart')
-                         .querySelector('#ASIN').value;
-    if (asin) {
-      this.setState({ asin: asin });
+    const asin = document.querySelector('#addToCart #ASIN').value;
+    const customId = this.grabCustomId();
+    if (asin && customId) {
+      this.setState({ asin });
+    } else if (asin) {
+      this.setState({ asin });
     }
+  }
+  
+  // Not yet supported on Purseio, so just keeping this here until it's enabled
+  grabCustomId() {
+    const urlObj = window.location;
+    const urlSearchArray = urlObj.search.split('&');
+    let customId;
+    urlSearchArray.forEach((searchIndex) => {
+      if (searchIndex.match(/^customId/)) {
+        customId = searchIndex.split('customId=')[1];
+      }
+    });
+    
+    return customId;
   }
 
   grabPrice() {
@@ -92,6 +110,31 @@ class App extends Component {
       });
   }
   
+  listenForStyleSwitch() {
+    const observerOptions = {
+      childList: true,
+      attributes: true,
+      characterDataOldValue: true,
+      subtree: true,
+      characterData: true,
+    }
+    const observer = new MutationObserver(this._debounce((mutationList, observer) => {
+      this.componentDidMount();
+    }, 1000));
+    observer.observe(document.querySelector('#desktop_unifiedPrice'), observerOptions);
+  }
+  
+  // the mutation observer callback gets run a bunch so debouncing it
+  _debounce(cb, time) {
+    let timeout;
+    return function () {
+      window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        cb.apply(this, arguments);
+      }, time);
+    }
+  }
+
   buildCart(item) {
     const itemId = item.asin;
     const itemExists = this.props

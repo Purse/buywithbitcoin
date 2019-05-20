@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Button from '../../styles/Button';
 
 class CartCheckout extends Component {
   calcTotal() {
@@ -22,9 +23,10 @@ class CartCheckout extends Component {
     return (
       <div className="col cart-checkout">
         <p>Cart subtotal ({this.props.cart.length} items): <span className="cart-total">{currSymbol}{cartTotal}</span></p>
-        <button type="button" 
-                className="btn btn-primary"
-                onClick={this.goToCheckout}>Proceed to Checkout</button>
+        <Button href="https://purse.io/checkout/nyd"
+                rel="noopener"
+                target="_blank">
+                Proceed to Checkout</Button>
       </div>
     );
   }

@@ -45,16 +45,6 @@
 #app .cart-checkout .cart-total {
   color: #333;
 }
-#app .cart-checkout button {
-  width: 92%;
-  margin: 0 0 20px;
-  background-color: #07AFF9;
-  border-color: #07AFF9;
-  border-radius: 10px;
-  font-size: 15px;
-  padding: 10px;
-}
-
 #app .balances {
   color: #6A8294;
   font-size: 12px;
@@ -73,81 +63,6 @@
   color: #4B5E6D;
   text-decoration: none;
   font-size: 16px;
-}
-
-#app .product {
-  position: relative;
-  padding: 20px 0;
-  background: #fff;
-  border-bottom: 1px solid #DADEE0;
-}
-
-#app .product:last-child {
-  border-bottom-width: 0px;
-}
-#app .product .product-meta .orig-price {
-  text-decoration: line-through;
-  padding-right: 10px;
-}
-#app .product .product-meta .discounted-price {
-  color: #B70101;
-}
-#app .product .product-meta p {
-  overflow: hidden;
-  font-size: 13px;
-  position: relative; 
-  line-height: 1.2em;
-  max-height: 3.6em; 
-  text-align: left;  
-  margin-right: -1em;
-  padding-right: 1em;
-  color: #1A2831;
-}
-#app .product .product-meta p:before {
-  content: '...';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-#app .product .product-meta p:after {
-  content: '';
-  position: absolute;
-  right: 0;
-  width: 1em;
-  height: 1em;
-  margin-top: 0.2em;
-  background: white;
-}
-/* #app .product .product-meta a {
-  overflow: hidden;
-  font-size: 13px;
-  white-space: nowrap;
-  text-overflow: ;
-  display:block;
-  width: 100%;
-  color: #1A2831;
-} */
-
-#app .product img {
-  width: 100%;
-}
-
-#app .product .product-actions {
-  color: #1A2831;
-  text-align: center;
-  padding-top: 20px;
-  font-size: 13px;
-}
-
-#app .product .product-actions span {
-  cursor: pointer;
-}
-
-#app .product .product-actions span:nth-child(2) {
-  padding: 0 5px;
-}
-
-#app .product .product-actions span:hover {
 }
 
 #app .checkout {

@@ -9,8 +9,8 @@ const proxyStore = new Store({portName: 'buywithbtc'});
 
 const anchor = document.createElement('div');
 anchor.id = 'rcr-anchor';
-if (document.getElementById('price') && document.getElementById('price').offsetWidth > 0) {
-  document.getElementById('price').after(anchor);
+if (document.getElementById('pmpux_feature_div') && document.getElementById('pmpux_feature_div').offsetWidth > 0) {
+  document.getElementById('pmpux_feature_div').after(anchor);
 } else if (document.getElementById('unifiedPrice_feature_div')) {
   document.getElementById('unifiedPrice_feature_div').after(anchor);
 } else if (document.getElementById('tmmSwatches')) {
@@ -18,7 +18,6 @@ if (document.getElementById('price') && document.getElementById('price').offsetW
 } else {
   document.getElementById('top').after(anchor);
 }
-
 
 proxyStore.ready().then(() => {
   render(<Provider store={proxyStore}><App/></Provider>, document.getElementById('rcr-anchor'));
