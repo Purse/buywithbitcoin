@@ -20,7 +20,7 @@ class App extends Component {
     this.setState({ buttonText: this.props.buttonText });
     this.grabAsin();
     this.grabPrice();
-    this.listenForStyleSwitch();
+    // this.listenForStyleSwitch();
   }
 
   grabAsin() {
@@ -49,12 +49,14 @@ class App extends Component {
 
   grabPrice() {
     let priceStr;
-    const symbolReg = /\$|,|￥|CDN\$/g;
+    const url = window.location && window.location.origin;
+    const tld = url && url.split('amazon')[1];
+    const country = this.tldMap(tld);
+    const symbolReg = /\$|,|￥|£|CDN\$/g;
     const productForm = document.querySelector('#addToCart');
     const dealPrice = document.querySelector('#priceblock_dealprice');
     const snsPrice = document.querySelector('#priceblock_snsprice_Based');
     const bookPrice = document.querySelector('.a-color-price.offer-price');
-
     if (dealPrice) {
       priceStr = dealPrice;
     } else if (productForm && productForm.querySelector('#price_inside_buybox')) {
@@ -68,14 +70,20 @@ class App extends Component {
       const priceBlock = document.querySelector('#price');
       priceStr = priceBlock.querySelector('span[id^=priceblock_ourprice]');
     }
-    
     const priceSymbol = priceStr.innerText.match(symbolReg)[0];
     const priceNum = parseFloat(priceStr.innerText.replace(symbolReg, ''));
     const fivePercentOff = (priceNum * (1 - .05)).toFixed(2);
     const thirtyThreePercentOff = (priceNum * .33).toFixed(2);
     const amountOffText = `${priceSymbol}${thirtyThreePercentOff}`;
     const pricingText = <span>Save up to <strong>{amountOffText}</strong> with Bitcoin</span>;
-    this.setState({ pricingText });
+    this.setState({ pricingText, country });
+  }
+  tldMap(tld) {
+    const tlds = {
+      '.co.uk': 'UK',
+      '.com': 'US'
+    };
+    return tlds[tld] || 'US';
   }
   turnClock() {
     const currentTurn = this.props.addingToCart.shift();
@@ -89,14 +97,14 @@ class App extends Component {
     const newItem = {
       asin: this.state.asin,
       quantity: 1,
-      country: 'US',
+      country: this.state.country,
       variation: true
     };
 
     this.props.dispatch(getCartItems(this.props.token))
       .then(() => {
         const body = {
-          country: 'US',
+          country: this.state.country,
           name: 'Cart',
           id: 1,
           items: this.buildCart(newItem)

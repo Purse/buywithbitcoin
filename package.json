@@ -9,7 +9,7 @@
     "deploy-patch": "npx mversion patch -m && npm run build-prod && npm run compress-build",
     "deploy-minor": "npx mversion minor -m && npm run build-prod && npm run compress-build",
     "deploy-major": "npx mversion major -m && npm run build-prod && npm run compress-build",
-    "build-dev": "./node_modules/.bin/webpack --mode development",
+    "build-dev": "./node_modules/.bin/webpack --watch --mode development",
     "build-prod": "./node_modules/.bin/webpack --mode production",
     "compress-build": "zip -r ./dist/Archive ./dist"
   },

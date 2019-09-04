@@ -21,7 +21,8 @@
   "content_scripts": [
     {
       "matches": [
-        "*://*.amazon.com/*"
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.uk/*"
       ],
       "css": [
         "./styles/button.css"
