@@ -22,7 +22,9 @@
     {
       "matches": [
         "*://*.amazon.com/*",
-        "*://*.amazon.co.uk/*"
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.ca/*",
+        "*://*.amazon.co.jp/*"
       ],
       "css": [
         "./styles/button.css"

@@ -24,9 +24,9 @@ class CartItem extends Component {
   }
 
   async cartUpdate(newCart) {
-    const { token, username, dispatch } = this.props;
+    const { token, username, dispatch, item } = this.props;
     const body = {
-      country: 'US',
+      country: item.country,
       name: 'Cart',
       id: 1,
       items: newCart
@@ -64,9 +64,18 @@ class CartItem extends Component {
 
     await this.cartUpdate(cart);
   }
+  countryMap(country) {
+    const countries = {
+      'UK': '.co.uk',
+      'CA': '.ca',
+      'JP': '.co.jp',
+      'US': '.com'
+    };
+    return countries[country] || '.com';
+  }
   render() {
     const { item } = this.props;
-    const productLink = `https://www.amazon.com/gp/product/${item.asin}`;
+    const productLink = `https://www.amazon${this.countryMap(item.country)}/dp/${item.asin}`;
     const itemImage = (item.images && item.images.small) ? item.images.small: '#';
     return (
       <Product className="row">

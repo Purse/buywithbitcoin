@@ -52,7 +52,7 @@ class App extends Component {
     const url = window.location && window.location.origin;
     const tld = url && url.split('amazon')[1];
     const country = this.tldMap(tld);
-    const symbolReg = /\$|,|￥|£|CDN\$/g;
+    const symbolReg = /\$|,|￥|¥|£|CDN\$/g;
     const productForm = document.querySelector('#addToCart');
     const dealPrice = document.querySelector('#priceblock_dealprice');
     const snsPrice = document.querySelector('#priceblock_snsprice_Based');
@@ -81,6 +81,8 @@ class App extends Component {
   tldMap(tld) {
     const tlds = {
       '.co.uk': 'UK',
+      '.ca': 'CA',
+      '.co.jp': 'JP',
       '.com': 'US'
     };
     return tlds[tld] || 'US';
