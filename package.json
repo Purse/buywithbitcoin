@@ -16,6 +16,7 @@
   "author": "Dylan Bathurst <dylanbathurst@gmail.com>",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "lodash-es": "^4.17.15",
     "react": "^16.3.0",
     "react-chrome-redux": "^2.0.0-alpha.5",
     "react-dom": "^16.3.0",
