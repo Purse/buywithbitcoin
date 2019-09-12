@@ -35,6 +35,7 @@
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^3.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "mixin-deep": "^2.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8"
