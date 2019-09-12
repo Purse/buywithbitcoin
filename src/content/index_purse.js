@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {Store} from 'react-chrome-redux';
 
-import PurseApp from './components/app/PurseApp';
+import PurseApp from './app/PurseApp';
 
 const proxyStore = new Store({portName: 'buywithbtc'});
 

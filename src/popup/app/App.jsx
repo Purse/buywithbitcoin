@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LoggedIn from './LoggedIn';
 import LoggedOut from './LoggedOut';
-import { getCartItems } from '../../../../../event/src/actions';
+import { getCartItems } from '../../event/actions';
 
 class App extends Component {
   constructor(props) {
@@ -27,9 +27,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.token,
-    username: state.user.name,
-    cart: state.items
+    token: state.token
   };
 };
 

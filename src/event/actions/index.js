@@ -1,8 +1,4 @@
-import 'babel-polyfill';
-
-function fetchRemoveItem(originalAction) {
-  
-}
+import '@babel/polyfill';
 
 function fetchUpdateList(originalAction) {
   const { token, username, body } = originalAction;
@@ -26,7 +22,7 @@ function fetchUpdateList(originalAction) {
   };
 }
 
-function fetchUsername(originalAction) {
+function fetchUserInfo(originalAction) {
   const { token } = originalAction;
   
   return (dispatch) => {
@@ -39,8 +35,7 @@ function fetchUsername(originalAction) {
       }
     }).then(res => res.json())
       .then(res => {
-        const { username } = res;
-        dispatch(addUsername(username));
+        dispatch(addUserInfo(res));
       })
       .catch(console.log);
   }; 
@@ -69,35 +64,26 @@ function fetchCartItems(originalAction) {
   };
 }
 
-function addItemToCart(token, username, body) {
+function updateCartItems(token, username, body) {
   return {
-    type: 'ADD_TO_CART',
-    token,
-    username,
-    body
-  }
-}
-
-function removeItemFromCart(token, username, body) {
-  return {
-    type: 'REMOVE_FROM_CART',
+    type: 'UPDATE_CART_ITEMS',
     token,
     username,
     body
   };
 }
 
-function getUsername(token) {
+function getUserInfo(token) {
   return {
-    type: 'GET_USERNAME',
+    type: 'GET_USERINFO',
     token
   };
 }
 
-function addUsername(username) {
+function addUserInfo(user) {
   return {
-    type: 'ADD_USERNAME',
-    username
+    type: 'ADD_USERINFO',
+    user
   };
 }
 
@@ -122,5 +108,5 @@ function addToken(token) {
   };
 }
 
-export { addUsername, addCartItems, getUsername, getCartItems, addItemToCart,
-         addToken, fetchUsername, fetchCartItems, fetchUpdateList, removeItemFromCart };
+export { addUserInfo, addCartItems, getUserInfo, getCartItems, addToken, 
+         fetchUserInfo, fetchCartItems, fetchUpdateList, updateCartItems };

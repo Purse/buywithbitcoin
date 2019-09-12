@@ -6,10 +6,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    index: './content/src/scripts/index.js',
-    index_purse: './content/src/scripts/index_purse.js',
-    event: './event/src/index.js',
-    popup: './popup/src/scripts/index.js'
+    index: './src/content/index.js',
+    index_purse: './src/content/index_purse.js',
+    event: './src/event/index.js',
+    popup: './src/popup/index.js'
   },
 
   output: {
@@ -42,13 +42,13 @@ module.exports = {
     new CopyWebpackPlugin([
       'manifest.json',
     {
-      from: 'popup/src/index.html',
+      from: 'src/popup/index.html',
       to: 'popup.html'
     },{
-      from: 'scripts',
+      from: 'src/scripts',
       to: 'scripts'
     },{
-      from: 'styles',
+      from: 'src/styles',
       to: 'styles'
     },{
       from: 'icons',

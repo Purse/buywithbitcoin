@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Buy With Bitcoin",
-  "description": "Get 5-33% off anything on Amazon with Bitcoin",
-  "version": "0.3.0",
+  "name": "Purse: Shop with Bitcoin (Beta)",
+  "description": "Get 5-33% off anything on Amazon with Bitcoin and Bitcoin Cash",
+  "version": "0.10.0",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -15,15 +15,16 @@
     "persistent": true
   },
   "browser_action": {
-    "default_title": "Pay With Bitcoin Button",
+    "default_title": "Purse: Shop with Bitcoin",
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
       "matches": [
         "*://*.amazon.com/*",
-        "*://*.amazon.co.jp/*",
-        "*://*.amazon.ca/*"
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.ca/*",
+        "*://*.amazon.co.jp/*"
       ],
       "css": [
         "./styles/button.css"

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../../../../../styles/amazon.button.css';
-import { getUsername, addUsername,
-         getCartItems, addItemToCart } from '../../../../../event/src/actions/index';
+import '../../styles/amazon.button.css';
+import { addUsername, getCartItems, updateCartItems } from '../../event/actions/index';
 
 class App extends Component {
   constructor(props) {
@@ -10,71 +9,142 @@ class App extends Component {
     this.state = {
       buttonText: ''
     };
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.hoverState = this.hoverState.bind(this);
     this.unHoverState = this.unHoverState.bind(this);
+    this.turnClock = this.turnClock.bind(this);
   }
   
   componentDidMount() {
     this.setState({ buttonText: this.props.buttonText });
     this.grabAsin();
     this.grabPrice();
+    // this.listenForStyleSwitch();
   }
 
   grabAsin() {
-    const asin = document.querySelector('#addToCart')
-                         .querySelector('#ASIN').value;
-    if (asin) {
-      this.setState({ asin: asin });
+    const asin = document.querySelector('#addToCart #ASIN').value;
+    const customId = this.grabCustomId();
+    if (asin && customId) {
+      this.setState({ asin });
+    } else if (asin) {
+      this.setState({ asin });
     }
+  }
+  
+  // Not yet supported on Purseio, so just keeping this here until it's enabled
+  grabCustomId() {
+    const urlObj = window.location;
+    const urlSearchArray = urlObj.search.split('&');
+    let customId;
+    urlSearchArray.forEach((searchIndex) => {
+      if (searchIndex.match(/^customId/)) {
+        customId = searchIndex.split('customId=')[1];
+      }
+    });
+    
+    return customId;
   }
 
   grabPrice() {
     let priceStr;
-    const symbolReg = /\$|,|￥|CDN\$/g;
+    const url = window.location && window.location.origin;
+    const tld = url && url.split('amazon')[1];
+    const country = this.tldMap(tld);
+    const symbolReg = /\$|,|￥|¥|£|CDN\$/g;
     const productForm = document.querySelector('#addToCart');
-    
-    if (productForm && productForm.querySelector('#price_inside_buybox')) {
+    const dealPrice = document.querySelector('#priceblock_dealprice');
+    const snsPrice = document.querySelector('#priceblock_snsprice_Based');
+    const bookPrice = document.querySelector('.a-color-price.offer-price');
+    if (dealPrice) {
+      priceStr = dealPrice;
+    } else if (productForm && productForm.querySelector('#price_inside_buybox')) {
       priceStr = document.querySelector('#addToCart')
         .querySelector('#price_inside_buybox');
+    } else if (snsPrice) {
+      priceStr = snsPrice;
+    } else if (bookPrice) {
+      priceStr = bookPrice;
     } else {
       const priceBlock = document.querySelector('#price');
       priceStr = priceBlock.querySelector('span[id^=priceblock_ourprice]');
     }
-    
     const priceSymbol = priceStr.innerText.match(symbolReg)[0];
     const priceNum = parseFloat(priceStr.innerText.replace(symbolReg, ''));
     const fivePercentOff = (priceNum * (1 - .05)).toFixed(2);
     const thirtyThreePercentOff = (priceNum * .33).toFixed(2);
     const amountOffText = `${priceSymbol}${thirtyThreePercentOff}`;
     const pricingText = <span>Save up to <strong>{amountOffText}</strong> with Bitcoin</span>;
-    this.setState({ pricingText });
+    this.setState({ pricingText, country });
   }
-
+  tldMap(tld) {
+    const tlds = {
+      '.co.uk': 'UK',
+      '.ca': 'CA',
+      '.co.jp': 'JP',
+      '.com': 'US'
+    };
+    return tlds[tld] || 'US';
+  }
+  turnClock() {
+    const currentTurn = this.props.addingToCart.shift();
+    this.props.addingToCart.push(currentTurn);
+    this.setState({ buttonText: currentTurn});  
+  }
   addToCart() {
+    const addingtoCartInterval = setInterval(this.turnClock, 300);
+    this.setState({addingtoCartInterval});
+    
     const newItem = {
       asin: this.state.asin,
       quantity: 1,
-      country: 'US',
+      country: this.state.country,
       variation: true
     };
 
     this.props.dispatch(getCartItems(this.props.token))
       .then(() => {
         const body = {
-          country: 'US',
+          country: this.state.country,
           name: 'Cart',
           id: 1,
           items: this.buildCart(newItem)
         };
-        this.props.dispatch(addItemToCart(this.props.token, this.props.username, body))
+        this.props.dispatch(updateCartItems(this.props.token, this.props.username, body))
           .then(() => {
+            clearInterval(this.state.addingtoCartInterval);
             const buttonText = this.props.buttonInCart;
             this.setState({ buttonText });
           });
       });
   }
   
+  listenForStyleSwitch() {
+    const observerOptions = {
+      childList: true,
+      attributes: true,
+      characterDataOldValue: true,
+      subtree: true,
+      characterData: true,
+    }
+    const observer = new MutationObserver(this._debounce((mutationList, observer) => {
+      this.componentDidMount();
+    }, 1000));
+    observer.observe(document.querySelector('#desktop_unifiedPrice'), observerOptions);
+  }
+  
+  // the mutation observer callback gets run a bunch so debouncing it
+  _debounce(cb, time) {
+    let timeout;
+    return function () {
+      window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        cb.apply(this, arguments);
+      }, time);
+    }
+  }
+
   buildCart(item) {
     const itemId = item.asin;
     const itemExists = this.props
@@ -123,10 +193,10 @@ class App extends Component {
           </button>
         </div>}
       {isNotLoggedIn &&
-        <button className='buttonStyle'
-                  onClick={this.navToPurse}>
-            <p>Log in at Purse.io</p>
-          </button>}
+        <button className='unAuthed'
+                onClick={this.navToPurse}>
+          Log in at Purse.io
+        </button>}
       </div>
     );
   }
@@ -135,13 +205,14 @@ class App extends Component {
 App.defaultProps = {
   buttonText: '➕',
   buttonHover: '☝️',
-  buttonInCart: '🤙'
+  buttonInCart: '🤙',
+  addingToCart: ['🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚','🕛']
 };
 
 const mapStateToProps = (state) => {
   return {
     token: state.token,
-    username: state.user.name,
+    username: state.user.username,
     cart: state.items
   };
 };

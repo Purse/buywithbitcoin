@@ -13,20 +13,12 @@ class LoggedOut extends Component {
     return (
       <div className="d-flex justify-content-center align-items-center">
         <div className="login">
-          <a target="_blank" href="https://purse.io">Go to Purse to log in</a>
+        <img src="https://purse.io/images/bold-icons/cart2.svg" />
+          <a target="_blank" href="https://purse.io">Connect Your Account</a>
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    count: state.count,
-    token: state.token,
-    username: state.user.name,
-    cart: state.cart
-  };
-};
-
-export default connect(mapStateToProps)(LoggedOut);
+export default connect()(LoggedOut);

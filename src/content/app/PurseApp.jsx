@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToken, getUsername,
-  getCartItems } from '../../../../../event/src/actions/index';
+import { addToken, getUserInfo,
+  getCartItems } from '../../event/actions/index';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class App extends Component {
         if (cookieKeyVal[0] === 'purse_token') {
           this.props.dispatch(addToken(cookieKeyVal[1]));
           this.props.dispatch(getCartItems(cookieKeyVal[1]));
-          this.props.dispatch(getUsername(cookieKeyVal[1]))
+          this.props.dispatch(getUserInfo(cookieKeyVal[1]))
             .then(() => {
               if (document.location.search.match(/amazon/g)) {
                 const amazonUrl = document.location.search.split('=')[1];

@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 
 function user(state = {}, action) {
   switch (action.type) {
-    case 'ADD_USERNAME':
-      return { name: action.username };
+    case 'ADD_USERINFO':
+      return { ...action.user };
       break;
     default:
       return state;
@@ -31,8 +31,19 @@ function token(state = '', action) {
   }
 }
 
+function discount(state = 0.05, action) {
+  switch (action.type) {
+    case 'SET_DISCOUNT':
+        return action.discount;
+      break;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   user,
   token,
-  items
+  items,
+  discount
 });
