@@ -4,7 +4,7 @@ function fetchUpdateList(originalAction) {
   const { token, username, body } = originalAction;
 
   return (dispatch) => {
-    return fetch(`https://api.purse.io/api/v1/users/${username}/lists/1`, {
+    return fetch(`https://api.purse.io/api/v2/users/${username}/lists/1`, {
       method: 'PUT',
       headers: {
         'Authorization': `JWT ${token}`,
@@ -24,7 +24,7 @@ function fetchUpdateList(originalAction) {
 
 function fetchUserInfo(originalAction) {
   const { token } = originalAction;
-  
+
   return (dispatch) => {
     return fetch(`https://api.purse.io/api/v1/users/me`, {
       method: 'GET',
@@ -38,14 +38,14 @@ function fetchUserInfo(originalAction) {
         dispatch(addUserInfo(res));
       })
       .catch(console.log);
-  }; 
+  };
 }
 
 function fetchCartItems(originalAction) {
   const { token } = originalAction;
-  
+
   return (dispatch) => {
-    return fetch(`https://api.purse.io/api/v1/users/me/lists`, {
+    return fetch(`https://api.purse.io/api/v2/users/me/lists`, {
       method: 'GET',
       headers: {
         'Authorization': `JWT ${token}`,
@@ -108,5 +108,5 @@ function addToken(token) {
   };
 }
 
-export { addUserInfo, addCartItems, getUserInfo, getCartItems, addToken, 
+export { addUserInfo, addCartItems, getUserInfo, getCartItems, addToken,
          fetchUserInfo, fetchCartItems, fetchUpdateList, updateCartItems };
