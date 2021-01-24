@@ -13,7 +13,7 @@ class App extends Component {
     if (!this.state.token) {
       document.cookie.split('; ').forEach((cookie) => {
         const cookieKeyVal = cookie.split('=');
-        if (cookieKeyVal[0] === 'purse_token_v2') {
+        if (cookieKeyVal[0] === 'purse_token') {
           this.props.dispatch(addToken(cookieKeyVal[1]));
           this.props.dispatch(getCartItems(cookieKeyVal[1]));
           this.props.dispatch(getUserInfo(cookieKeyVal[1]))
