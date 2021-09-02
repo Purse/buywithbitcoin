@@ -43,8 +43,5 @@
     }
   ],
   "permissions": [
-    "tabs",
-    "*://*.amazon.com/",
-    "https://purse.io/"
   ]
 }
