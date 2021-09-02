@@ -1,8 +1,8 @@
 {
-  "name": "Pay-With-Bitcoin-Button",
+  "name": "buywithbitcoin",
   "version": "0.10.0",
   "private": true,
-  "description": "Get 5-33% off anything on Amazon.com with Bitcoin",
+  "description": "Get 5-33% off Amazon by using Bitcoin",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build-dev",
