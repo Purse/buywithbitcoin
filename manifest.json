@@ -24,7 +24,8 @@
         "*://*.amazon.com/*",
         "*://*.amazon.co.uk/*",
         "*://*.amazon.ca/*",
-        "*://*.amazon.co.jp/*"
+        "*://*.amazon.co.jp/*",
+        "*://*.amazon.de/*"
       ],
       "css": [
         "./styles/button.css"
