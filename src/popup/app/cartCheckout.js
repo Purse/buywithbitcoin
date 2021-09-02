@@ -6,16 +6,16 @@ class CartCheckout extends Component {
   calcTotal() {
     const items = this.props.cart;
     let total = 0;
-    
+
     items.forEach((item) => {
       const { quantity, fiat_price } = item;
       total += parseFloat(quantity * fiat_price);
     });
-    
+
     return (total * (1 - this.props.discount)).toFixed(2);
   }
   goToCheckout() {
-    window.open('https://purse.io/checkout/nyd');
+    window.open('https://purse.io/checkout/nyd?ref=ChromePurse');
   }
   render() {
     const cartTotal = this.calcTotal();
@@ -23,7 +23,7 @@ class CartCheckout extends Component {
     return (
       <div className="col cart-checkout">
         <p>Cart subtotal ({this.props.cart.length} items): <span className="cart-total">{currSymbol}{cartTotal}</span></p>
-        <Button href="https://purse.io/checkout/nyd"
+        <Button href="https://purse.io/checkout/nyd?ref=ChromePurse"
                 rel="noopener"
                 target="_blank">
                 Proceed to Checkout</Button>
