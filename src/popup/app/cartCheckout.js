@@ -30,7 +30,7 @@ class CartCheckout extends Component {
     const currSymbol = this.getCurrencySymbol();
     return (
       <div className="col cart-checkout">
-        <p>Cart subtotal ({this.props.cart.length} items): <span className="cart-total">{currSymbol}{cartTotal}</span></p>
+        <p>Cart subtotal ({this.props.cart.length} items): <span className="cart-total">{currSymbol}&nbsp;{cartTotal}</span></p>
         <Button href="https://purse.io/checkout/nyd?ref=ChromePurse"
                 rel="noopener"
                 target="_blank">
