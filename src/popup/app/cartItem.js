@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { countryConfigs } from '../../content/app/SanitizePrice';
 import { updateCartItems } from '../../event/actions';
 import Product from '../../styles/Product';
 
@@ -85,8 +86,8 @@ class CartItem extends Component {
         </div>
         <div className="col-6 product-meta">
           <p onClick={() => {window.open(productLink)}}>{item.name}</p>
-          <p><span className="orig-price">${item.fiat_price}</span>
-          <span className="discounted-price">${this.state.discountedPrice || 0}</span></p>
+          <p><span className="orig-price">{countryConfigs[item.country.toLowerCase()].symbol}{item.fiat_price}</span>
+          <span className="discounted-price">{countryConfigs[item.country.toLowerCase()].symbol}{this.state.discountedPrice || 0}</span></p>
         </div>
         <div className="col-3 product-actions">
           <span onClick={() => { this.decrementProduct(item.asin) }}>&mdash;</span>

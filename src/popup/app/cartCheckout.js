@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { countryConfigs } from '../../content/app/SanitizePrice';
 import Button from '../../styles/Button';
 
 class CartCheckout extends Component {
@@ -14,12 +15,19 @@ class CartCheckout extends Component {
 
     return (total * (1 - this.props.discount)).toFixed(2);
   }
+  getCurrencySymbol() {
+    const items = this.props.cart;
+    if (items && items.length) {
+      return countryConfigs[items[0].country.toLowerCase()].symbol;
+    }
+    return this.props.user.settings.currency_symbol;
+  }
   goToCheckout() {
     window.open('https://purse.io/checkout/nyd?ref=ChromePurse');
   }
   render() {
     const cartTotal = this.calcTotal();
-    const currSymbol = this.props.user.settings.currency_symbol;
+    const currSymbol = this.getCurrencySymbol();
     return (
       <div className="col cart-checkout">
         <p>Cart subtotal ({this.props.cart.length} items): <span className="cart-total">{currSymbol}{cartTotal}</span></p>

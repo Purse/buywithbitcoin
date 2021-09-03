@@ -1,4 +1,4 @@
-const countryConfigs = {
+export const countryConfigs = {
   us: {
     currency: 'USD',
     domain: '.com',
