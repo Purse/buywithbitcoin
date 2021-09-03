@@ -4,16 +4,14 @@ import thunkMiddleware from 'redux-thunk';
 import { wrapStore, alias } from 'react-chrome-redux';
 import aliases from './aliases';
 
-chrome.runtime.onInstalled.addListener(() => {
-  const store = createStore(
-    rootReducer,
-    applyMiddleware(
-      alias(aliases),
-      thunkMiddleware
-    )
-  );
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    alias(aliases),
+    thunkMiddleware
+  )
+);
 
-  wrapStore(store, {
-    portName: 'buywithbtc'
-  });
+wrapStore(store, {
+  portName: 'buywithbtc'
 });
