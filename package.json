@@ -19,7 +19,7 @@
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "mem": "^5.1.1",
-    "react": "^16.14.0",
+    "preact": "^10.5.14",
     "react-chrome-redux": "^2.0.0-alpha.5",
     "react-dom": "^16.14.0",
     "react-redux": "^5.1.2",

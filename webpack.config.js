@@ -21,6 +21,12 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.json'],
     modules: ['node_modules'],
+    alias: {
+      "react": "preact/compat",
+      "react-dom/test-utils": "preact/test-utils",
+      "react-dom": "preact/compat",     // Must be below test-utils
+      "react/jsx-runtime": "preact/jsx-runtime",
+    },
   },
 
   module: {
