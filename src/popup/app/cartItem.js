@@ -11,7 +11,7 @@ class CartItem extends Component {
     this.incrementProduct = this.incrementProduct.bind(this);
     this.discountedPrice = this.discountedPrice.bind(this);
   }
-  
+
   componentDidMount() {
     this.discountedPrice();
   }
@@ -69,7 +69,8 @@ class CartItem extends Component {
       'UK': '.co.uk',
       'CA': '.ca',
       'JP': '.co.jp',
-      'US': '.com'
+      'US': '.com',
+      'DE': '.de'
     };
     return countries[country] || '.com';
   }
@@ -84,7 +85,7 @@ class CartItem extends Component {
         </div>
         <div className="col-6 product-meta">
           <p onClick={() => {window.open(productLink)}}>{item.name}</p>
-          <p><span className="orig-price">${item.fiat_price}</span> 
+          <p><span className="orig-price">${item.fiat_price}</span>
           <span className="discounted-price">${this.state.discountedPrice || 0}</span></p>
         </div>
         <div className="col-3 product-actions">

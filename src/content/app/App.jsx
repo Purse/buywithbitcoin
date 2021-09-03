@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../../styles/amazon.button.css';
 import { addUsername, getCartItems, updateCartItems } from '../../event/actions/index';
+import sanitizePrice from './SanitizePrice';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class App extends Component {
     this.unHoverState = this.unHoverState.bind(this);
     this.turnClock = this.turnClock.bind(this);
   }
-  
+
   componentDidMount() {
     this.setState({ buttonText: this.props.buttonText });
     this.grabAsin();
@@ -32,7 +33,7 @@ class App extends Component {
       this.setState({ asin });
     }
   }
-  
+
   // Not yet supported on Purseio, so just keeping this here until it's enabled
   grabCustomId() {
     const urlObj = window.location;
@@ -43,7 +44,7 @@ class App extends Component {
         customId = searchIndex.split('customId=')[1];
       }
     });
-    
+
     return customId;
   }
 
@@ -52,7 +53,7 @@ class App extends Component {
     const url = window.location && window.location.origin;
     const tld = url && url.split('amazon')[1];
     const country = this.tldMap(tld);
-    const symbolReg = /\$|,|￥|¥|£|CDN\$/g;
+    const symbolReg = /\$|￥|¥|£|€|EUR|CDN\$/g;
     const productForm = document.querySelector('#addToCart');
     const dealPrice = document.querySelector('#priceblock_dealprice');
     const snsPrice = document.querySelector('#priceblock_snsprice_Based');
@@ -71,31 +72,33 @@ class App extends Component {
       priceStr = priceBlock.querySelector('span[id^=priceblock_ourprice]');
     }
     const priceSymbol = priceStr.innerText.match(symbolReg)[0];
-    const priceNum = parseFloat(priceStr.innerText.replace(symbolReg, ''));
+    const priceNum = sanitizePrice(priceStr.innerText, country);
     const fivePercentOff = (priceNum * (1 - .05)).toFixed(2);
     const thirtyThreePercentOff = (priceNum * .33).toFixed(2);
     const amountOffText = `${priceSymbol}${thirtyThreePercentOff}`;
     const pricingText = <span>Save up to <strong>{amountOffText}</strong> with Bitcoin</span>;
     this.setState({ pricingText, country });
   }
+
   tldMap(tld) {
     const tlds = {
       '.co.uk': 'UK',
       '.ca': 'CA',
       '.co.jp': 'JP',
-      '.com': 'US'
+      '.com': 'US',
+      '.de': 'DE'
     };
     return tlds[tld] || 'US';
   }
   turnClock() {
     const currentTurn = this.props.addingToCart.shift();
     this.props.addingToCart.push(currentTurn);
-    this.setState({ buttonText: currentTurn});  
+    this.setState({ buttonText: currentTurn});
   }
   addToCart() {
     const addingtoCartInterval = setInterval(this.turnClock, 300);
     this.setState({addingtoCartInterval});
-    
+
     const newItem = {
       asin: this.state.asin,
       quantity: 1,
@@ -119,7 +122,7 @@ class App extends Component {
           });
       });
   }
-  
+
   listenForStyleSwitch() {
     const observerOptions = {
       childList: true,
@@ -133,7 +136,7 @@ class App extends Component {
     }, 1000));
     observer.observe(document.querySelector('#desktop_unifiedPrice'), observerOptions);
   }
-  
+
   // the mutation observer callback gets run a bunch so debouncing it
   _debounce(cb, time) {
     let timeout;
