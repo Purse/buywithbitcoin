@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Purse: Shop with Bitcoin (Beta)",
   "description": "Get 5-33% off anything on Amazon with Bitcoin and Bitcoin Cash",
   "version": "1.0.0",
@@ -14,7 +14,7 @@
     ],
     "persistent": true
   },
-  "browser_action": {
+  "action": {
     "default_title": "Purse: Shop with Bitcoin",
     "default_popup": "popup.html"
   },

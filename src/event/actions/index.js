@@ -15,7 +15,7 @@ function fetchUpdateList(originalAction) {
     }).then(res => res.json())
       .then(async (res) => {
         const text = (res.items.length) ? res.items.length.toString() : '' ;
-        chrome.browserAction.setBadgeText({ text });
+        chrome.action.setBadgeText({ text });
         await dispatch(addCartItems(res.items))
       })
       .catch(console.log);
@@ -57,7 +57,7 @@ function fetchCartItems(originalAction) {
         if (res[0] && res[0].items) {
           dispatch(addCartItems(res[0].items));
           const text = (res[0].items.length) ? res[0].items.length.toString() : '' ;
-          chrome.browserAction.setBadgeText({ text });
+          chrome.action.setBadgeText({ text });
         }
       })
       .catch(console.log);
