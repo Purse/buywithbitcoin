@@ -46,10 +46,10 @@ module.exports = {
           from: 'src/popup/index.html',
           to: 'popup.html',
         },
-        {
-          from: 'src/scripts',
-          to: 'scripts',
-        },
+        // {
+        //   from: 'src/scripts',
+        //   to: 'scripts',
+        // },
         {
           from: 'src/styles',
           to: 'styles',
