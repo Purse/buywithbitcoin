@@ -40,5 +40,7 @@
       ]
     }
   ],
-  "permissions": []
+  "permissions": [
+    "storage"
+  ]
 }
