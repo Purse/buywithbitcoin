@@ -21,9 +21,8 @@
     "mem": "^5.1.1",
     "preact": "^10.5.14",
     "react-chrome-redux": "^2.0.0-alpha.5",
-    "react-dom": "^16.14.0",
     "react-redux": "^5.1.2",
-    "redux": "^3.7.2",
+    "redux": "^4.1.1",
     "redux-thunk": "^2.2.0",
     "reduxed-chrome-storage": "^2.4.7",
     "styled-components": "^4.4.1"

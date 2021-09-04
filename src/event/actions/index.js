@@ -12,7 +12,7 @@ function fetchUpdateList(originalAction) {
         'origin': 'https://purse.io'
       },
       body: JSON.stringify(body)
-    }).then(res => res.json())
+    }).then(baseHandler(dispatch))
       .then(async (res) => {
         const text = (res.items.length) ? res.items.length.toString() : '' ;
         chrome.action.setBadgeText({ text });
@@ -33,7 +33,7 @@ function fetchUserInfo(originalAction) {
         'Content-Type': 'application/json',
         'origin': 'https://purse.io'
       }
-    }).then(res => res.json())
+    }).then(baseHandler(dispatch))
       .then(res => {
         dispatch(addUserInfo(res));
       })
@@ -52,7 +52,7 @@ function fetchCartItems(originalAction) {
         'Content-Type': 'application/json',
         'origin': 'https://purse.io'
       }
-    }).then(res => res.json())
+    }).then(baseHandler(dispatch))
       .then(res => {
         if (res[0] && res[0].items) {
           dispatch(addCartItems(res[0].items));
@@ -106,6 +106,18 @@ function addToken(token) {
     type: 'ADD_TOKEN',
     token: token
   };
+}
+
+function baseHandler(dispatch) {
+  return function(res) {
+    if (res.status == 401) {
+      // TODO:
+      // dispatch(addCartItems([])); // empty cart
+      dispatch(addToken(null));   // logout
+      throw new Error("Logged out");
+    }
+    return res.json();
+  }
 }
 
 export { addUserInfo, addCartItems, getUserInfo, getCartItems, addToken,
