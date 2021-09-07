@@ -12,7 +12,9 @@ const asyncStoreCreator = storeCreatorFactory(options);
 
 asyncStoreCreator(rootReducer, applyMiddleware(alias(aliases), thunkMiddleware))
   .then((store) => {
-    wrapStore(store, {
-      portName: 'buywithbtc',
+    setTimeout(() => {
+      wrapStore(store, {
+        portName: 'buywithbtc',
+      });
     });
   });

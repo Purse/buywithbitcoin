@@ -1,6 +1,7 @@
 {
     "env": {
         "browser": true,
+        "node": true,
         "es2021": true
     },
     "extends": [
@@ -18,6 +19,7 @@
         "react"
     ],
     "rules": {
+        "semi": ["error", "always"]
     },
     "globals": {
         "chrome": true
