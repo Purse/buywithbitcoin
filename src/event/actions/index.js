@@ -111,8 +111,7 @@ function addToken(token) {
 function baseHandler(dispatch) {
   return function(res) {
     if (res.status == 401) {
-      // TODO:
-      // dispatch(addCartItems([])); // empty cart
+      chrome.action.setBadgeText({text: ''});  // cart appears empty
       dispatch(addToken(null));   // logout
       throw new Error("Logged out");
     }
