@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 
 import App from './app/App';
 
-import {Store} from 'react-chrome-redux';
+import {Store} from 'webext-redux';
 import {Provider} from 'react-redux';
 
 const proxyStore = new Store({
@@ -15,4 +15,3 @@ proxyStore.ready().then(() => {
      <Provider store={proxyStore}><App /></Provider>
     ,document.getElementById('app'));
 });
-

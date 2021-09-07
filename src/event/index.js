@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import storeCreatorFactory from 'reduxed-chrome-storage';
 import rootReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
-import { wrapStore, alias } from 'react-chrome-redux';
+import { wrapStore, alias } from 'webext-redux';
 import aliases from './aliases';
 
 const options = {

@@ -11,6 +11,11 @@
   "background": {
     "service_worker": "event.js"
   },
+  "externally_connectable": {
+    "matches": [
+      "https://purse.io/*"
+    ]
+  },
   "action": {
     "default_title": "Purse: Shop with Bitcoin",
     "default_popup": "popup.html"

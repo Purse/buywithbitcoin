@@ -11,17 +11,22 @@ class App extends Component {
       buttonText: ''
     };
     this.componentDidMount = this.componentDidMount.bind(this);
-    this.addToCart = this.addToCart.bind(this);
+    this.addToCart = this._debounce(this.addToCart.bind(this), 100);
     this.hoverState = this.hoverState.bind(this);
     this.unHoverState = this.unHoverState.bind(this);
     this.turnClock = this.turnClock.bind(this);
+    this.changeObserver = false;
   }
 
   componentDidMount() {
+    this.renderProductInfo();
+    this.listenForVariationChange();
+  }
+
+  renderProductInfo() {
     this.setState({ buttonText: this.props.buttonText });
     this.grabAsin();
     this.grabPrice();
-    // this.listenForStyleSwitch();
   }
 
   grabAsin() {
@@ -116,25 +121,50 @@ class App extends Component {
         };
         this.props.dispatch(updateCartItems(this.props.token, this.props.username, body))
           .then(() => {
-            clearInterval(this.state.addingtoCartInterval);
-            const buttonText = this.props.buttonInCart;
-            this.setState({ buttonText });
+            if (this.state.addingtoCartInterval) {
+              setTimeout(() => {
+                clearInterval(this.state.addingtoCartInterval);
+                this.addingtoCartInterval = null;
+                const buttonText = this.props.buttonInCart;
+                this.setState({ buttonText });
+              }, 200)
+            }
           });
       });
   }
 
-  listenForStyleSwitch() {
-    const observerOptions = {
-      childList: true,
-      attributes: true,
-      characterDataOldValue: true,
-      subtree: true,
-      characterData: true,
+  /**
+   * Adds an observer that updates the component if a variation is selected.
+   */
+  listenForVariationChange() {
+    // Only create 1 observer
+    if (!this.changeObserver) {
+      const observerOptions = {
+        childList: true,
+        attributes: true,
+        characterDataOldValue: true,
+        subtree: true,
+        characterData: true,
+      }
+
+      let el = '';
+      if (document.getElementById('pmpux_feature_div') && document.getElementById('pmpux_feature_div').offsetWidth > 0) {
+        el = document.getElementById('pmpux_feature_div')
+      } else if (document.getElementById('unifiedPrice_feature_div')) {
+        el = document.getElementById('unifiedPrice_feature_div')
+      } else if (document.getElementById('tmmSwatches')) {
+        el = document.getElementById('tmmSwatches')
+      } else if (document.getElementById('top')) {
+        el = document.getElementById('top')
+      }
+
+      if (el) {
+        this.changeObserver = new MutationObserver(this._debounce((mutationList, observer) => {
+          this.renderProductInfo();
+        }, 500));
+        this.changeObserver.observe(el, observerOptions);
+      }
     }
-    const observer = new MutationObserver(this._debounce((mutationList, observer) => {
-      this.componentDidMount();
-    }, 1000));
-    observer.observe(document.querySelector('#desktop_unifiedPrice'), observerOptions);
   }
 
   // the mutation observer callback gets run a bunch so debouncing it
