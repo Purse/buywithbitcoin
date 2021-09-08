@@ -15,8 +15,8 @@ function fetchUpdateList(originalAction) {
     }).then(baseHandler(dispatch))
       .then(async (res) => {
         const text = (res.items.length) ? res.items.length.toString() : '' ;
-        chrome.action.setBadgeText({ text });
-        await dispatch(addCartItems(res.items))
+        chrome.browserAction.setBadgeText({ text });
+        await dispatch(addCartItems(res.items));
       })
       .catch(console.log);
   };
@@ -57,7 +57,7 @@ function fetchCartItems(originalAction) {
         if (res[0] && res[0].items) {
           dispatch(addCartItems(res[0].items));
           const text = (res[0].items.length) ? res[0].items.length.toString() : '' ;
-          chrome.action.setBadgeText({ text });
+          chrome.browserAction.setBadgeText({ text });
         }
       })
       .catch(console.log);
@@ -110,13 +110,13 @@ function addToken(token) {
 
 function baseHandler(dispatch) {
   return function(res) {
-    if (res.status == 401) {
-      chrome.action.setBadgeText({text: ''});  // cart appears empty
+    if (res.status === 401) {
+      chrome.browserAction.setBadgeText({text: ''});  // cart appears empty
       dispatch(addToken(null));   // logout
       throw new Error("Logged out");
     }
     return res.json();
-  }
+  };
 }
 
 export { addUserInfo, addCartItems, getUserInfo, getCartItems, addToken,

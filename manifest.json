@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Purse: Shop with Bitcoin (Beta)",
   "description": "Get 5-33% off anything on Amazon with Bitcoin and Bitcoin Cash",
   "version": "1.2.0",
@@ -9,14 +9,17 @@
     "128": "icons/icon128.png"
   },
   "background": {
-    "service_worker": "event.js"
+    "scripts": [
+      "event.js"
+    ],
+    "persistent": true
   },
   "externally_connectable": {
     "matches": [
       "https://purse.io/*"
     ]
   },
-  "action": {
+  "browser_action": {
     "default_title": "Purse: Shop with Bitcoin",
     "default_popup": "popup.html"
   },
@@ -45,7 +48,5 @@
       ]
     }
   ],
-  "permissions": [
-    "storage"
-  ]
+  "permissions": []
 }

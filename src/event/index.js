@@ -1,20 +1,17 @@
 import { createStore, applyMiddleware } from 'redux';
-import storeCreatorFactory from 'reduxed-chrome-storage';
 import rootReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import { wrapStore, alias } from 'webext-redux';
 import aliases from './aliases';
 
-const options = {
-  createStore: createStore,
-};
-const asyncStoreCreator = storeCreatorFactory(options);
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    alias(aliases),
+    thunkMiddleware
+  )
+);
 
-asyncStoreCreator(rootReducer, applyMiddleware(alias(aliases), thunkMiddleware))
-  .then((store) => {
-    setTimeout(() => {
-      wrapStore(store, {
-        portName: 'buywithbtc',
-      });
-    });
-  });
+wrapStore(store, {
+  portName: 'buywithbtc'
+});
