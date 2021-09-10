@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToken, getUserInfo,
-  getCartItems } from '../../event/actions/index';
+import { addToken, getUserInfo, getCartItems } from '../../event/actions/index';
+import PropTypes from 'prop-types';
 
-class App extends Component {
+class PurseApp extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -18,8 +18,9 @@ class App extends Component {
           this.props.dispatch(getCartItems(cookieKeyVal[1]));
           this.props.dispatch(getUserInfo(cookieKeyVal[1]))
             .then(() => {
-              if (document.location.search.match(/amazon/g)) {
-                const amazonUrl = document.location.search.split('=')[1];
+              const params = new URLSearchParams(window.location.search);
+              if (params.has('ext_redirect') && params.get('ext_redirect').includes('amazon.')) {
+                const amazonUrl = params.get('ext_redirect');
                 document.location = amazonUrl;
               }
             });
@@ -39,4 +40,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+PurseApp.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps)(PurseApp);

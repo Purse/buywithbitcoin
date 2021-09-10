@@ -8,17 +8,17 @@ class LoggedIn extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   checkout() {
     window.open('https://purse.io/checkout/nyd?ref=ChromePurse');
   }
-  
+
   goToAmazon() {
     window.open('https://www.amazon.com');
   }
 
   numberFormat(number, dec, dsep, tsep) {
-	  if (isNaN(number) || number == null) {
+    if (isNaN(number) || number == null) {
 			return '';
 		}
 
@@ -40,12 +40,12 @@ class LoggedIn extends Component {
       cartItems = this.props.cart.map((item, iter) => {
         totalCost += (item.fiat_price * item.quantity);
         numberOfItems += item.quantity;
-        return (<CartItem key={iter} item={item} />)
+        return (<CartItem key={iter} item={item} />);
       });
     }
-    
+
     const { username, picture, first_name, last_name, wallet } = this.props.user;
-    
+
     return (
       <div className="row">
         { (cartItems.length)
@@ -63,13 +63,13 @@ class LoggedIn extends Component {
               <div className="empty-cart-container">
                 <p className="empty-purse">Your Purse shopping cart is empty.</p>
                 <button className="btn primary"
-                        onClick={this.goToAmazon}>Shop on Amazon</button>  
+                        onClick={this.goToAmazon}>Shop on Amazon</button>
                 <p><a href="https://support.purse.io/">Contact Us</a></p>
                 <p><a href="https://purse.io/how-it-works">How it Works</a></p>
                 <p><a href="https://purse.io">Purse.io</a></p>
               </div>
             </div>
-        } 
+        }
       </div>
     );
   }
