@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../../styles/amazon.button.css';
 import PropTypes from 'prop-types';
+import styles from '../../styles/amazon.button.css';
 
 class TrackingApp extends Component {
   constructor(props) {
@@ -59,16 +59,16 @@ class TrackingApp extends Component {
     const isNotLoggedIn = !this.props.token;
 
     return (
-      <div className='dislayStyle'>
+      <div className={styles.dislayStyle}>
       {isLoggedIn && this.state.trackingHref &&
-        <a href={this.state.trackingHref} className="unAuthed">
+        <a href={this.state.trackingHref} className={styles.unAuthed}>
           {this.state.buttonText}
         </a>}
       {isLoggedIn && !this.state.trackingHref &&
-        <span className="buttonWrapStyle">{this.state.buttonText}</span>
+        <span className={styles.unAuthed}>{this.state.buttonText}</span>
       }
       {isNotLoggedIn &&
-        <button className="unAuthed" onClick={this.navToPurse}>
+        <button className={styles.unAuthed} onClick={this.navToPurse}>
           Log in at Purse.io
         </button>}
       </div>

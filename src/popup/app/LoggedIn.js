@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CartItem from './cartItem';
 import CartCheckout from './cartCheckout';
 import '../../styles/popup.css';
+import PropTypes from 'prop-types';
 
 class LoggedIn extends Component {
   constructor(props) {
@@ -34,17 +35,17 @@ class LoggedIn extends Component {
 
   render() {
     let cartItems = [];
-    let totalCost = 0;
-    let numberOfItems = 0;
+    // let totalCost = 0;
+    // let numberOfItems = 0;
     if (this.props.cart && this.props.cart.length) {
       cartItems = this.props.cart.map((item, iter) => {
-        totalCost += (item.fiat_price * item.quantity);
-        numberOfItems += item.quantity;
+        // totalCost += (item.fiat_price * item.quantity);
+        // numberOfItems += item.quantity;
         return (<CartItem key={iter} item={item} />);
       });
     }
 
-    const { username, picture, first_name, last_name, wallet } = this.props.user;
+    // const { username, picture, first_name, last_name, wallet } = this.props.user;
 
     return (
       <div className="row">
@@ -74,6 +75,11 @@ class LoggedIn extends Component {
     );
   }
 }
+
+LoggedIn.propTypes = {
+  user: PropTypes.object,
+  cart: PropTypes.array,
+};
 
 const mapStateToProps = (state) => {
   return {

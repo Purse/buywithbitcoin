@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../../styles/amazon.button.css';
 import { getCartItems, updateCartItems } from '../../event/actions/index';
 import sanitizePrice from './SanitizePrice';
 import PropTypes from 'prop-types';
+import styles from '../../styles/amazon.button.css';
 
 class ProductApp extends Component {
   constructor(props) {
@@ -212,14 +212,14 @@ class ProductApp extends Component {
     const isNotLoggedIn = !this.props.token;
 
     return (
-      <div className='dislayStyle'>
+      <div className={styles.dislayStyle}>
       {isLoggedIn && this.state.asin &&
-        <div className='buttonWrapStyle'
+        <div className={styles.buttonWrapStyle}
              onClick={this.addToCart}
              onMouseEnter={this.hoverState}
              onMouseLeave={this.unHoverState}>
           {this.state.pricingText}
-          <button className='buttonStyle'
+          <button className={styles.buttonStyle}
                   onClick={this.addToCart}
                   onMouseEnter={this.hoverState}
                   onMouseLeave={this.unHoverState}>
@@ -227,7 +227,7 @@ class ProductApp extends Component {
           </button>
         </div>}
       {isNotLoggedIn &&
-        <button className='unAuthed'
+        <button className={styles.unAuthed}
                 onClick={this.navToPurse}>
           Log in at Purse.io
         </button>}

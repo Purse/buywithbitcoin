@@ -32,9 +32,6 @@
         "*://*.amazon.co.jp/*",
         "*://*.amazon.de/*"
       ],
-      "css": [
-        "./styles/button.css"
-      ],
       "js": [
         "index.js"
       ]

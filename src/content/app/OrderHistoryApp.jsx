@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../../styles/amazon.button.css';
 import PropTypes from 'prop-types';
 import {render} from 'react-dom';
 import OrderItem from './OrderItem';
+import styles from '../../styles/amazon.button.css';
 
 class OrderHistoryApp extends Component {
   constructor(props) {
@@ -50,12 +50,12 @@ class OrderHistoryApp extends Component {
     const isNotLoggedIn = !this.props.token;
 
     return (
-      <div className='dislayStyle'>
+      <div className={styles.dislayStyle}>
       {isLoggedIn &&
         <span></span>
       }
       {isNotLoggedIn &&
-        <button className="unAuthed" onClick={this.navToPurse}>
+        <button className={styles.unAuthed} onClick={this.navToPurse}>
           Log in at Purse.io
         </button>}
       </div>
