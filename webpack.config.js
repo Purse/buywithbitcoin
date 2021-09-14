@@ -28,7 +28,6 @@ module.exports = {
       "react/jsx-runtime": "preact/jsx-runtime",
     },
   },
-
   module: {
     rules: [
       {
@@ -40,7 +39,8 @@ module.exports = {
               "@babel/preset-env",
               {
                 "targets": {
-                  "node": "10"
+                  "chrome": "72",
+                  "firefox": "48"
                 }
               }
             ],
