@@ -51,7 +51,17 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "pio_[local]",
+              },
+            },
+          }
+        ],
         exclude: /(node_modules)/,
       },
     ],

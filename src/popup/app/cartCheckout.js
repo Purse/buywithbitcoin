@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { countryConfigs } from '../../content/app/SanitizePrice';
 import Button from '../../styles/Button';
+import PropTypes from 'prop-types';
 
 class CartCheckout extends Component {
   calcTotal() {
@@ -49,6 +50,12 @@ const mapStateToProps = (state) => {
     cart: state.items,
     discount: state.discount
   };
+};
+
+CartCheckout.propTypes = {
+  discount: PropTypes.number,
+  user: PropTypes.object,
+  cart: PropTypes.array
 };
 
 export default connect(mapStateToProps)(CartCheckout);

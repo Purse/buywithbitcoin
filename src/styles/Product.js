@@ -4,21 +4,21 @@ const Product = styled.div`
   padding: 20px 0;
   background: #fff;
   border-bottom: 1px solid #DADEE0;
-  
+
   &:last-child {
     border-bottom-width: 0px;
   }
-  
+
   & img {
     width: 100%;
   }
-  
+
   & .product-actions {
     color: #1A2831;
     text-align: center;
     padding-top: 20px;
     font-size: 13px;
-    
+
     & span {
       cursor: pointer;
       &:nth-child(2) {
@@ -26,7 +26,7 @@ const Product = styled.div`
       }
     }
   }
-  
+
   & .product-meta {
     & .orig-price {
       text-decoration: line-through;
@@ -38,14 +38,14 @@ const Product = styled.div`
     & p {
       overflow: hidden;
       font-size: 13px;
-      position: relative; 
+      position: relative;
       line-height: 1.2em;
-      max-height: 3.6em; 
-      text-align: left;  
+      max-height: 3.6em;
+      text-align: left;
       margin-right: -1em;
       padding-right: 1em;
       color: #1A2831;
-      
+
       &:before {
         content: '...';
         position: absolute;
@@ -63,7 +63,6 @@ const Product = styled.div`
       }
     }
   }
-  jj
 `;
 
 export default Product;

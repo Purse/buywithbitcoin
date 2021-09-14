@@ -7,7 +7,8 @@ const pulse = keyframes`
   100% {
     background: rgba(0, 212, 255, 1);
   }
-`
+`;
+
 const Button = styled.a`
   width: 92%;
   margin: 0 0 20px;
@@ -20,7 +21,7 @@ const Button = styled.a`
   display: inline-block;
   font-weight: 400;
   text-align: center;
-  
+
   &:hover {
     animation: 1s ${pulse} alternate infinite;
   }

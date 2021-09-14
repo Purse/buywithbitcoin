@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import LoggedIn from './LoggedIn';
 import LoggedOut from './LoggedOut';
 import { getCartItems } from '../../event/actions';
+import PropTypes from 'prop-types';
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +25,11 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  token: PropTypes.string,
+};
 
 const mapStateToProps = (state) => {
   return {

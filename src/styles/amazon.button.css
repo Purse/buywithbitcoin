@@ -44,6 +44,7 @@
 
 .unAuthed:hover {
   background-color: #fafafa;
+  cursor: pointer;
 }
 
 .buttonWrapStyle:hover {

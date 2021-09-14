@@ -3,22 +3,23 @@ import { connect } from 'react-redux';
 import CartItem from './cartItem';
 import CartCheckout from './cartCheckout';
 import '../../styles/popup.css';
+import PropTypes from 'prop-types';
 
 class LoggedIn extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   checkout() {
     window.open('https://purse.io/checkout/nyd?ref=ChromePurse');
   }
-  
+
   goToAmazon() {
     window.open('https://www.amazon.com');
   }
 
   numberFormat(number, dec, dsep, tsep) {
-	  if (isNaN(number) || number == null) {
+    if (isNaN(number) || number == null) {
 			return '';
 		}
 
@@ -34,18 +35,18 @@ class LoggedIn extends Component {
 
   render() {
     let cartItems = [];
-    let totalCost = 0;
-    let numberOfItems = 0;
+    // let totalCost = 0;
+    // let numberOfItems = 0;
     if (this.props.cart && this.props.cart.length) {
       cartItems = this.props.cart.map((item, iter) => {
-        totalCost += (item.fiat_price * item.quantity);
-        numberOfItems += item.quantity;
-        return (<CartItem key={iter} item={item} />)
+        // totalCost += (item.fiat_price * item.quantity);
+        // numberOfItems += item.quantity;
+        return (<CartItem key={iter} item={item} />);
       });
     }
-    
-    const { username, picture, first_name, last_name, wallet } = this.props.user;
-    
+
+    // const { username, picture, first_name, last_name, wallet } = this.props.user;
+
     return (
       <div className="row">
         { (cartItems.length)
@@ -63,17 +64,22 @@ class LoggedIn extends Component {
               <div className="empty-cart-container">
                 <p className="empty-purse">Your Purse shopping cart is empty.</p>
                 <button className="btn primary"
-                        onClick={this.goToAmazon}>Shop on Amazon</button>  
-                <p><a href="https://support.purse.io/">Contact Us</a></p>
-                <p><a href="https://purse.io/how-it-works">How it Works</a></p>
-                <p><a href="https://purse.io">Purse.io</a></p>
+                        onClick={this.goToAmazon}>Shop on Amazon</button>
+                <p><a href="https://support.purse.io/" target="_blank" rel="noreferrer">Contact Us</a></p>
+                <p><a href="https://purse.io/how-it-works" target="_blank" rel="noreferrer">How it Works</a></p>
+                <p><a href="https://purse.io" target="_blank" rel="noreferrer">Purse.io</a></p>
               </div>
             </div>
-        } 
+        }
       </div>
     );
   }
 }
+
+LoggedIn.propTypes = {
+  user: PropTypes.object,
+  cart: PropTypes.array,
+};
 
 const mapStateToProps = (state) => {
   return {

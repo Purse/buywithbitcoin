@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { countryConfigs } from '../../content/app/SanitizePrice';
 import { updateCartItems } from '../../event/actions';
 import Product from '../../styles/Product';
+import PropTypes from 'prop-types';
 
 class CartItem extends Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class CartItem extends Component {
   }
 
   async incrementProduct(asin) {
-    let cart = this.props.cart.map((item, index) => {
+    let cart = this.props.cart.map((item) => {
       if (item.asin === asin && item.quantity < item.quantity_available) {
         item.quantity += 1;
       }
@@ -85,19 +86,28 @@ class CartItem extends Component {
           <img src={itemImage} />
         </div>
         <div className="col-6 product-meta">
-          <p onClick={() => {window.open(productLink)}}>{item.name}</p>
+          <p onClick={() => {window.open(productLink);}}>{item.name}</p>
           <p><span className="orig-price">{countryConfigs[item.country.toLowerCase()].symbol}{item.fiat_price}</span>
           <span className="discounted-price">{countryConfigs[item.country.toLowerCase()].symbol}{this.state.discountedPrice || 0}</span></p>
         </div>
         <div className="col-3 product-actions">
-          <span onClick={() => { this.decrementProduct(item.asin) }}>&mdash;</span>
+          <span onClick={() => { this.decrementProduct(item.asin); }}>&mdash;</span>
           <span>{item.quantity}</span>
-          <span onClick={() => { this.incrementProduct(item.asin) }}>+</span>
+          <span onClick={() => { this.incrementProduct(item.asin); }}>+</span>
         </div>
       </Product>
     );
   }
 }
+
+CartItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  cart: PropTypes.array,
+  token: PropTypes.string,
+  username: PropTypes.string,
+  dispatch: PropTypes.func.isRequired,
+  discount: PropTypes.number
+};
 
 const mapStateToProps = (state) => {
   return {
