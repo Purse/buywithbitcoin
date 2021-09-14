@@ -75,6 +75,9 @@ module.exports = {
           from: 'src/popup/index.html',
           to: 'popup.html',
         },
+        {
+          from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js',
+        },
         // {
         //   from: 'src/scripts',
         //   to: 'scripts',

@@ -10,6 +10,7 @@
   },
   "background": {
     "scripts": [
+      "browser-polyfill.js",
       "event.js"
     ],
     "persistent": true
@@ -33,6 +34,7 @@
         "*://*.amazon.de/*"
       ],
       "js": [
+        "browser-polyfill.js",
         "index.js"
       ]
     },
@@ -41,9 +43,15 @@
         "*://purse.io/*"
       ],
       "js": [
+        "browser-polyfill.js",
         "index_purse.js"
       ]
     }
   ],
-  "permissions": []
+  "permissions": [],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "buywithbitcoin@purse.io"
+    }
+  }
 }
