@@ -5,4 +5,5 @@ build.pem
 .DS_Store
 */.DS_Store
 dist.crx
+dist.pem
 .vscode/settings.json
