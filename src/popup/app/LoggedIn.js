@@ -64,9 +64,9 @@ class LoggedIn extends Component {
                 <p className="empty-purse">Your Purse shopping cart is empty.</p>
                 <button className="btn primary"
                         onClick={this.goToAmazon}>Shop on Amazon</button>
-                <p><a href="https://support.purse.io/">Contact Us</a></p>
-                <p><a href="https://purse.io/how-it-works">How it Works</a></p>
-                <p><a href="https://purse.io">Purse.io</a></p>
+                <p><a href="https://support.purse.io/" target="_blank" rel="noreferrer">Contact Us</a></p>
+                <p><a href="https://purse.io/how-it-works" target="_blank" rel="noreferrer">How it Works</a></p>
+                <p><a href="https://purse.io" target="_blank" rel="noreferrer">Purse.io</a></p>
               </div>
             </div>
         }
