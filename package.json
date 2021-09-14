@@ -6,17 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build-dev",
+    "start-ff": "web-ext run --target=firefox-desktop --source-dir ./dist/",
     "deploy-patch": "npx mversion patch -m && npm run build-prod && npm run compress-build",
     "deploy-minor": "npx mversion minor -m && npm run build-prod && npm run compress-build",
     "deploy-major": "npx mversion major -m && npm run build-prod && npm run compress-build",
     "build-dev": "./node_modules/.bin/webpack --watch --mode development",
     "build-prod": "./node_modules/.bin/webpack --mode production",
-    "compress-build": "zip -r ./dist/Archive ./dist"
+    "compress-build": "cd ./dist && web-ext build"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "lodash": "^4.17.21",
-    "lodash-es": "^4.17.21",
+    "core-js": "^3.17.3",
     "preact": "^10.5.14",
     "react-redux": "^7.2.5",
     "redux": "^4.1.1",
@@ -41,6 +40,7 @@
     "html-webpack-plugin": "^5.3.2",
     "mixin-deep": "^2.0.1",
     "style-loader": "^3.2.1",
+    "web-ext": "^6.4.0",
     "webextension-polyfill": "^0.8.0",
     "webpack": "^5.52.1",
     "webpack-cli": "^4.8.0"

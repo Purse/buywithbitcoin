@@ -1,4 +1,5 @@
-import '@babel/polyfill';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
 function fetchUpdateList(originalAction) {
   const { token, username, body } = originalAction;
