@@ -51,7 +51,8 @@
   "permissions": [],
   "browser_specific_settings": {
     "gecko": {
-      "id": "buywithbitcoin@purse.io"
+      "id": "buywithbitcoin@purse.io",
+      "strict_min_version": "55"
     }
   }
 }
