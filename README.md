@@ -1,7 +1,13 @@
-# Purse Chrome Extension
-Get 5-33% off items on Amazon with Bitcoin.
+# Purse Browser Extension
+[Purse.io](https://purse.io) gets you 5-33% off items on Amazon when shopping with Bitcoin or Bitcoin Cash.
 
-# Supported Domains
+The Purse Browser Extension (Chrome and Firefox) provides enhanced functionality when interacting with Amazon by adding widgets to the page.
+
+Shoppers: Can add items to cart directly from Amazon product pages.  View your Purse Cart, and proceed to Checkout.
+
+Earners: Submit tracking information directly to purse from within the Amazon Tracking Pages.
+
+### Supported Domains
 - amazon.com
 - amazon.co.uk
 - amazon.ca
