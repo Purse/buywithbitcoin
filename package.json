@@ -12,10 +12,10 @@
     "deploy-major": "npx mversion major -m && npm run build-prod && npm run compress-build",
     "build-dev": "./node_modules/.bin/webpack --watch --mode development",
     "build-prod": "./node_modules/.bin/webpack --mode production",
+    "clean": "rm -rf ./dist",
     "compress-build": "cd ./dist && web-ext build"
   },
   "dependencies": {
-    "core-js": "^3.17.3",
     "preact": "^10.5.14",
     "react-redux": "^7.2.5",
     "redux": "^4.1.1",
