@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -76,6 +75,7 @@ module.exports = {
           to: 'popup.html',
         },
         {
+          // Polyfill for chrome -> firefox extension compatibility
           from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js',
         },
         // {
