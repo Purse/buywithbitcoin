@@ -61,18 +61,23 @@ class ProductApp extends Component {
     const country = this.tldMap(tld);
     const symbolReg = /\$|￥|¥|£|€|EUR|CDN\$/g;
     const productForm = document.querySelector('#addToCart');
-    const dealPrice = document.querySelector('#priceblock_dealprice');
-    const snsPrice = document.querySelector('#priceblock_snsprice_Based');
-    const bookPrice = document.querySelector('.a-color-price.offer-price');
+    const dealPrice =
+      document.querySelector('#priceblock_dealprice') ||
+      document.querySelector('#priceblock_saleprice') ||
+      document.getElementById('#priceblock_pospromoprice') ||
+      document.querySelector('#priceblock_snsprice_Based') ||
+      document.querySelector('.a-color-price.offer-price') ||
+      document.querySelector('#buyNewSection .offer-price') ||
+      document.querySelector('#new-button-price span') ||
+      document.querySelector('#priceblock_ourprice span:not(:first-child)') ||
+      document.querySelector('#MediaMatrix .swatchElement .a-color-price') ||
+      document.querySelector('.kindle-price .a-color-price') ||
+      document.querySelector('#newOfferAccordionRow .a-color-price');
+
     if (dealPrice) {
       priceStr = dealPrice;
     } else if (productForm && productForm.querySelector('#price_inside_buybox')) {
-      priceStr = document.querySelector('#addToCart')
-        .querySelector('#price_inside_buybox');
-    } else if (snsPrice) {
-      priceStr = snsPrice;
-    } else if (bookPrice) {
-      priceStr = bookPrice;
+      priceStr = productForm.querySelector('#price_inside_buybox');
     } else {
       const priceBlock = document.querySelector('#price');
       priceStr = priceBlock.querySelector('span[id^=priceblock_ourprice]');
