@@ -9,6 +9,7 @@ module.exports = {
     index_purse: './src/content/index_purse.js',
     event: './src/event/index.js',
     popup: './src/popup/index.js',
+    options: './src/options/index.js'
   },
 
   output: {
@@ -73,6 +74,10 @@ module.exports = {
         {
           from: 'src/popup/index.html',
           to: 'popup.html',
+        },
+        {
+          from: 'src/options/index.html',
+          to: 'options.html',
         },
         {
           // Polyfill for chrome -> firefox extension compatibility
