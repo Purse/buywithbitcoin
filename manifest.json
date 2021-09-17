@@ -20,6 +20,10 @@
       "https://purse.io/*"
     ]
   },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
   "browser_action": {
     "default_title": "Purse: Shop with Bitcoin",
     "default_popup": "popup.html"
@@ -48,7 +52,9 @@
       ]
     }
   ],
-  "permissions": [],
+  "permissions": [
+    "storage"
+  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "buywithbitcoin@purse.io",

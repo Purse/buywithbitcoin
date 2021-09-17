@@ -16,6 +16,11 @@ let pageType = 'product';
 /**
  * Tries to place the purse widget on the product page.
  */
+const trackingAnchor =
+  document.getElementById('primaryStatus') || // v1
+  document.querySelector('.pt-promise-details-slot') || //v2
+  document.getElementById('promise-card-asin-image-carousel'); //v2 alternate
+
 if (document.getElementById('pmpux_feature_div') && document.getElementById('pmpux_feature_div').offsetWidth > 0) {
   document.getElementById('pmpux_feature_div').after(anchor);
 } else if (document.getElementById('unifiedPrice_feature_div')) {
@@ -24,10 +29,10 @@ if (document.getElementById('pmpux_feature_div') && document.getElementById('pmp
   document.getElementById('tmmSwatches').after(anchor);
 } else if (document.getElementById('top')) {
   document.getElementById('top').after(anchor);
-} else if (document.getElementById('primaryStatus') && location.href.match(/progress-tracker/)) {
+} else if (trackingAnchor && location.href.match(/progress-tracker/)) {
   // Is Tracking Page
   pageType = 'tracking';
-  document.getElementById('primaryStatus').after(anchor);
+  trackingAnchor.after(anchor);
 } else if (document.getElementById('ordersContainer') && location.href.match(/order-history/)) {
   // Is Order History
   pageType = 'orderHistory',
@@ -37,33 +42,41 @@ if (document.getElementById('pmpux_feature_div') && document.getElementById('pmp
   pageType = false;
 }
 
-proxyStore.ready().then(() => {
-  switch (pageType) {
-    case 'product':
-      render(
-        <Provider store={proxyStore}>
-          <ProductApp />
-        </Provider>,
-        document.getElementById('rcr-anchor')
-      );
-      break;
-    case 'tracking':
-      render(
-        <Provider store={proxyStore}>
-          <TrackingApp />
-        </Provider>,
-        document.getElementById('rcr-anchor')
-      );
-      break;
-    case 'orderHistory':
-      render(
-        <Provider store={proxyStore}>
-          <OrderHistoryApp />
-        </Provider>,
-        document.getElementById('rcr-anchor')
-      );
-      break;
-    default:
-      break;
-  }
+chrome.storage.sync.get({
+  shopperFeatures: true,
+  earnerFeatures: true
+}, function(items) {
+  proxyStore.ready().then(() => {
+    switch (pageType) {
+      case 'product': {
+        items.shopperFeatures && render(
+          <Provider store={proxyStore}>
+            <ProductApp />
+          </Provider>,
+          document.getElementById('rcr-anchor')
+        );
+        break;
+      }
+      case 'tracking': {
+        items.earnerFeatures && render(
+          <Provider store={proxyStore}>
+            <TrackingApp />
+          </Provider>,
+          document.getElementById('rcr-anchor')
+        );
+        break;
+      }
+      case 'orderHistory': {
+        items.earnerFeatures && render(
+          <Provider store={proxyStore}>
+            <OrderHistoryApp />
+          </Provider>,
+          document.getElementById('rcr-anchor')
+        );
+        break;
+      }
+      default:
+        break;
+    }
+  });
 });
