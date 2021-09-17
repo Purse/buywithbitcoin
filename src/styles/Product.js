@@ -14,17 +14,62 @@ const Product = styled.div`
   }
 
   & .product-actions {
-    color: #1A2831;
-    text-align: center;
-    padding-top: 20px;
+    clear: both;
+    margin: 15px 0;
+    position: relative;
     font-size: 13px;
 
-    & span {
-      cursor: pointer;
-      &:nth-child(2) {
-        padding: 0 5px;
-      }
+    input,
+    textarea {
+      border: 1px solid #eeeeee;
+      box-sizing: border-box;
+      margin: 0;
+      outline: none;
+      padding: 10px;
     }
+
+    input[type="button"] {
+      -webkit-appearance: button;
+      cursor: pointer;
+      background-color: #eeeeee;
+      min-width: 18px;
+      transition: all 300ms ease;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    .button-minus,
+    .button-plus {
+      font-weight: bold;
+      height: 38px;
+      padding: 0;
+      width: 18px;
+      position: relative;
+    }
+
+    .quantity-field {
+      position: relative;
+      height: 38px;
+      left: -6px;
+      text-align: center;
+      width: 42px;
+      display: inline-block;
+      font-size: 13px;
+      resize: vertical;
+    }
+
+    .button-plus {
+      left: -13px;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+      -webkit-appearance: none;
+    }
+
   }
 
   & .product-meta {
@@ -34,6 +79,9 @@ const Product = styled.div`
     }
     & .discounted-price {
       color: #B70101;
+    }
+    & .product-title {
+      cursor: pointer;
     }
     & p {
       overflow: hidden;

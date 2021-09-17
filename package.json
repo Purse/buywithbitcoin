@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build-dev",
-    "start-ff": "web-ext run --target=firefox-desktop --source-dir ./dist/",
+    "start-ff": "web-ext run --target=firefox-android --source-dir ./dist/",
     "deploy-patch": "npx mversion patch -m && npm run build-prod && npm run compress-build",
     "deploy-minor": "npx mversion minor -m && npm run build-prod && npm run compress-build",
     "deploy-major": "npx mversion major -m && npm run build-prod && npm run compress-build",
