@@ -14,17 +14,24 @@ class TrackingApp extends Component {
 
   componentDidMount() {
     try {
-      const pageState = document.querySelector('[data-a-state=\'{"key":"page-state"}\']');
-      const trackingId = JSON.parse(pageState.innerText).trackingId.trim();
+      const pageState = JSON.parse(document.querySelector('[data-a-state=\'{"key":"page-state"}\']').innerText);
+      const trackingId = pageState.trackingId.trim();
       const amazonOrderId = location.href.match(/orderId=(\d{3}-\d{7}-\d{7})/)[1];
-      const statusEl = document.querySelector('#primaryStatus');
+      let statusText = '';
+
+      try {
+        statusText = pageState.promise.promiseMessage.trim();
+      } catch (err) {
+        console.log('Unable to retrieve statusText', err);
+      }
+
       if (!amazonOrderId) {
         throw new Error('Cannot retrieve amazonOrderId from URL');
       }
       if (trackingId) {
         let href = `https://purse.io/add-tracking/${amazonOrderId}/${trackingId}?ref=ChromePurse`;
-        if (statusEl) {
-          href += `&status=${encodeURIComponent(statusEl.innerText)}`;
+        if (statusText) {
+          href += `&status=${encodeURIComponent(statusText)}`;
         }
         this.setState({
           buttonText: `Send Tracking: ${trackingId}`,
