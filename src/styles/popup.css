@@ -100,24 +100,3 @@
   margin-bottom: 20px;
   color: #1A2831;
 }
-.cart-meta {
-  font-size: 12px;
-  color:#6A8294;
-  opacity: .9;
-}
-
-.cart-meta .item-count {
-  padding-right: 20px;
-}
-
-.cart-meta .item-count-label {
-
-}
-
-.cart-meta .cart-cost {
-
-}
-
-.cart-meta .cart-cost-label {
-  font-size: .7em;
-}
