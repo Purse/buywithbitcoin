@@ -33,6 +33,15 @@ class LoggedIn extends Component {
 		return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + tsep) + decimals;
 	}
 
+  openOptions() {
+    if (chrome.runtime.openOptionsPage) {
+      chrome.runtime.openOptionsPage();
+    } else {
+      window.open(chrome.runtime.getURL('options.html'));
+    }
+    return false;
+  }
+
   render() {
     let cartItems = [];
     // let totalCost = 0;
@@ -53,6 +62,7 @@ class LoggedIn extends Component {
           ? <div className="col">
               <div className="row header no-gutters">
                <CartCheckout />
+               <span onClick={this.openOptions} className="options-sprocket"></span>
              </div>
              <div className="row content">
                <div className="col">
@@ -65,6 +75,7 @@ class LoggedIn extends Component {
                 <p className="empty-purse">Your Purse shopping cart is empty.</p>
                 <button className="btn primary"
                         onClick={this.goToAmazon}>Shop on Amazon</button>
+                <p><a href="#" onClick={this.openOptions}>Configure Options</a></p>
                 <p><a href="https://support.purse.io/" target="_blank" rel="noreferrer">Contact Us</a></p>
                 <p><a href="https://purse.io/how-it-works" target="_blank" rel="noreferrer">How it Works</a></p>
                 <p><a href="https://purse.io" target="_blank" rel="noreferrer">Purse.io</a></p>
