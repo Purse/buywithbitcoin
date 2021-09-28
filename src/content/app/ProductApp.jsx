@@ -31,7 +31,14 @@ class ProductApp extends Component {
   }
 
   grabAsin() {
-    const asin = document.querySelector('#addToCart #ASIN').value;
+    const asinEl = document.querySelector('#addToCart #ASIN');
+    let asin = '';
+    if (asinEl) {
+      asin = asinEl.value;
+    } else {
+      // Probably on mobile, so try to grab the asin from the URL
+      document.location.href;
+    }
     const customId = this.grabCustomId();
     if (asin && customId) {
       this.setState({ asin });

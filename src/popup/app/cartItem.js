@@ -86,14 +86,16 @@ class CartItem extends Component {
           <img src={itemImage} />
         </div>
         <div className="col-6 product-meta">
-          <p onClick={() => {window.open(productLink);}}>{item.name}</p>
+          <p className="product-title" onClick={() => {window.open(productLink);}}>{item.name}</p>
           <p><span className="orig-price">{countryConfigs[item.country.toLowerCase()].symbol}{item.fiat_price}</span>
           <span className="discounted-price">{countryConfigs[item.country.toLowerCase()].symbol}{this.state.discountedPrice || 0}</span></p>
         </div>
-        <div className="col-3 product-actions">
-          <span onClick={() => { this.decrementProduct(item.asin); }}>&mdash;</span>
-          <span>{item.quantity}</span>
-          <span onClick={() => { this.incrementProduct(item.asin); }}>+</span>
+        <div className="col-3">
+          <div className="product-actions">
+            <input type="button" value="-" className="button-minus" onClick={() => { this.decrementProduct(item.asin); }}></input>
+            <input type="number" step="1" max="" value={item.quantity} name="quantity" readOnly className="quantity-field"></input>
+            <input type="button" value="+" className="button-plus" onClick={() => { this.incrementProduct(item.asin); }}></input>
+          </div>
         </div>
       </Product>
     );
