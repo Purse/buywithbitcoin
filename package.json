@@ -1,6 +1,6 @@
 {
   "name": "buywithbitcoin",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "private": true,
   "description": "Get 5-33% off Amazon by using Bitcoin",
   "scripts": {
