@@ -61,19 +61,35 @@ class ProductApp extends Component {
     const country = this.tldMap(tld);
     const symbolReg = /\$|￥|¥|£|€|EUR|CDN\$/g;
     const productForm = document.querySelector('#addToCart');
-    const dealPrice =
-      document.querySelector('#priceblock_dealprice') ||
-      document.querySelector('#priceblock_saleprice') ||
-      document.getElementById('#priceblock_pospromoprice') ||
-      document.querySelector('#priceblock_snsprice_Based') ||
-      document.querySelector('.a-color-price.offer-price') ||
-      document.querySelector('#buyNewSection .offer-price') ||
-      document.querySelector('#new-button-price span') ||
-      document.querySelector('#priceblock_ourprice span:not(:first-child)') ||
-      document.querySelector('#MediaMatrix .swatchElement .a-color-price') ||
-      document.querySelector('.kindle-price .a-color-price') ||
-      document.querySelector('#newOfferAccordionRow .a-color-price');
+    const priceOptions = [
+      '#priceblock_ourprice span:not(:first-child)',
+      '#new-button-price span',
+      '#price_inside_buybox',
+      '#buyNewSection .offer-price',
+      '#priceblock_ourprice',
+      '#priceblock_saleprice',
+      '#priceblock_dealprice:not(.a-text-strike)',
+      '#priceblock_dealprice span:not(.a-text-strike)',
+      '#priceblock_pospromoprice',
+      '#usedBuySection .offer-price',
+      '#buybox_feature_div .a-color-price',
+      '#newOfferAccordionRow .a-color-price',
+      '#mediaTab_content_landing .a-color-price',
+      '.kindle-price .a-color-price',
+      '#MediaMatrix .swatchElement .a-color-price',
+      '#corePrice_feature_div .a-price [aria-hidden]',
+      '#corePrice_feature_div .a-price',
+      '#corePrice_desktop .a-price [aria-hidden]',
+      '#corePrice_desktop .a-price'
+    ];
 
+    let dealPrice = null;
+    for (const priceOption of priceOptions) {
+      const el = document.querySelector(priceOption)
+      if (el) {
+        dealPrice = el;
+      }
+    }
     if (dealPrice) {
       priceStr = dealPrice;
     } else if (productForm && productForm.querySelector('#price_inside_buybox')) {
